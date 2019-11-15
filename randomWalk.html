@@ -1,0 +1,51 @@
+<html>
+	</center>
+
+  <body>
+    <canvas id="canvas" height="500" width="750"></canvas>
+  </body>
+  	</center>
+
+  
+  <script>
+    let x = 750/2;
+    let y = 500/2;
+
+    function init() {
+      window.requestAnimationFrame(draw);
+    }
+    function draw() {
+      const stepSize= 5;
+	  // maybe canvas should be cosnt?
+	  canvas = document.getElementById('canvas');
+	  canvas.style = "position: absolute; top: 0px; left: 0px; right: 0px; bottom: 0px; margin: auto; border:0.2px solid blue";
+      const ctx = canvas.getContext('2d');
+	
+      ctx.beginPath();
+      ctx.moveTo(x, y);
+      nextMove = Math.floor(Math.random() * 4) + 1;
+		switch(nextMove) {
+		  case 1:
+			x +=stepSize;
+			break;
+		  case 2:
+			x -=stepSize;
+			break;
+		  case 3:
+			y +=stepSize;
+			break;
+		  case 4:
+			y -=stepSize;
+			break;
+		  default:
+			// code block
+		}	  
+
+      ctx.lineWidth = 2;
+      ctx.lineTo(x, y);
+      ctx.stroke();
+      window.requestAnimationFrame(draw);
+    }
+    init();
+  </script>
+</html>
