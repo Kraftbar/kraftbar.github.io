@@ -1,5 +1,4 @@
 const svgArea = document.getElementById("svgArea");
-const polyhedronMenu = document.getElementById("polyhedronMenu");
 
 const viewPortWidth = 400;
 const viewPortHeight = 400;
@@ -10,6 +9,10 @@ const svgEl = document.createElementNS("http://www.w3.org/2000/svg","svg");
 svgEl.setAttribute("width",viewPortWidth);
 svgEl.setAttribute("height",viewPortHeight);
 svgEl.setAttribute("viewBox",`-20 -20 ${viewBoxWidth} ${viewBoxWidth}`);
+
+
+let xb_deg=0
+let zb_deg=0
 
 // insert svg element to page
 svgArea.appendChild(svgEl);
@@ -149,14 +152,6 @@ const rotX = ((deg) => {
 }
              );
 
-const scaleX = ((sc) => {
-    vertices = vertices . map ( ([x,y,z]) => [
-        sc * x,
-        sc * y,
-        sd * z ] );
-}
-               );
-
 // zProj([x,y,z]) parallel projects a 3d point into 2d, by just dropping z. return [x,y]
 const zProj = (([x,y,z]) => [x,y]);
 
@@ -171,14 +166,21 @@ const createSvgFace = ((j) => {
 
 
 const doKeyPress = ((key) => {
-    // up arrow
-    if (key.keyCode === 38) { rotX(rotationKeyIncrement)};
+    console.log(xb_deg)
+    console.log(zb_deg)
+
+   // up arrow
+    if (key.keyCode === 38) { rotX(rotationKeyIncrement)
+                              xb_deg+=rotationKeyIncrement};
     // down arrow
-    if (key.keyCode === 40) { rotX(-rotationKeyIncrement)};
+    if (key.keyCode === 40) { rotX(-rotationKeyIncrement)
+                              xb_deg-=rotationKeyIncrement};
     // right arrow
-    if (key.keyCode === 39) { rotZ(rotationKeyIncrement)};
+    if (key.keyCode === 39) { rotZ(rotationKeyIncrement)
+                              zb_deg+=rotationKeyIncrement};
     // left arrow
-    if (key.keyCode === 37) { rotZ(-rotationKeyIncrement)};
+    if (key.keyCode === 37) { rotZ(-rotationKeyIncrement)
+                              zb_deg-=rotationKeyIncrement};
 });
 
 const render = () => {
@@ -187,21 +189,14 @@ const render = () => {
 };
 
 const init = (() => {
-    initVertices(polyhedronMenu.value);
-    rotX(0);
-    rotZ(0);
+    initVertices("cube");
     render();
 });
 
 init();
 
 {
-    // setup events and handler
-
     // make arrow keys to rotate the object
     document . body. addEventListener("keydown", ((keyPressed) => { doKeyPress(keyPressed); render(); }));
 
-    // when user select a object in menu, draw it
-    polyhedronMenu. addEventListener("change", (() => {initVertices(polyhedronMenu.value); rotZ(0); rotX(10); render(); polyhedronMenu.blur();}));
-    polyhedronMenu. addEventListener("input", (() => {initVertices(polyhedronMenu.value); rotZ(0); rotX(10); render(); polyhedronMenu.blur(); }));
 }
