@@ -2,30 +2,30 @@ body {
   background-color: #F0F0F0;
 }
 
-
 .card {
-       position: relative;
-        display: inline-block;
-        margin: 20px;
-    }
-    .card .img-back { 
+  position: relative;
+  display: inline-block;
+  margin: 20px;
+}
+
+.card .img-back {
   width: 400px;
   position: relative;
-  margin-top: 236px;/* 1142-732 =   410px;*/
-	left: 0;
-        z-index: 0;
-    }
+  margin-top: 236px;
+  /* 1142-732 =   410px;*/
+  left: 0;
+  z-index: 0;
+}
 
-    .card .img-top {
+.card .img-top {
   width: 440px;
   display: none;
-  	position: absolute;
-        top: 0;
-        left: 0;
-        z-index: 99;
-    }
-    .card:hover .img-top {
-        display: inline;
-    }
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
 
-
+.card:hover .img-top {
+  display: inline;
+}
