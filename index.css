@@ -1,4 +1,9 @@
-    .card {
+body {
+  background-color: #F0F0F0;
+}
+
+
+.card {
        position: relative;
         display: inline-block;
         margin: 20px;
@@ -22,3 +27,5 @@
     .card:hover .img-top {
         display: inline;
     }
+
+
