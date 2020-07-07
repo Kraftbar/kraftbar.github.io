@@ -1,3 +1,7 @@
+// TODO
+//   - lower / capital
+
+
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
 ctx.font = "30px Arial";
@@ -32,6 +36,8 @@ function pros(csv){
       }
       words_length=i;
     }
+    document.getElementById('output').innerHTML = words[k][0]+" "+words[k][1];
+    
 }
 
 
@@ -52,37 +58,66 @@ function processFile(){
 }
 
 
+// Feedback correct 
+function prossAswer(userInput, solution){
+  var string_feedback="";
+  for (var i = 0; i < solution.length; i++) {
+      if(userInput.charAt(i)==solution.charAt(i)){
+          string_feedback=string_feedback.concat(userInput.charAt(i));
+      }else{
+          string_feedback=string_feedback.concat("_");
+      }
+      
+  }
+  return string_feedback;
+}
+
 // -----------------------
-// display array 
+// display word array 
 // -----------------------
 
 
 
 function nextItem() {
-    k = k + 1; // increase i by one
-    k = k % words_length; // if we've gone too high, start from `0` again
+    document.getElementById('feedback').innerHTML="<br/>";
     
-    return words[k].join(" "); // give us back the item of where we are now
+    k = k + 1; 
+    k = k % words_length; 
+
+    var inputF = document.getElementById("typed_word"); 
+    inputF.value = ""; 
+
+    return  words[k][0]+" "+words[k][1];
 }
 function prevItem() {
+    document.getElementById('feedback').innerHTML="<br/>";
+
+
     if (k === 0) { // i would become 0
         k = words_length; // so put it at the other end of the array
     }
     k = k - 1; // decrease by one
-    return words[k].join(" "); // give us back the item of where we are now
+    
+    var inputF = document.getElementById("typed_word"); 
+    inputF.value = ""; 
+
+    return words[k][0]+" "+words[k][1]; // give us back the item of where we are now
 }
 function checkItem() {
 
-    var inputVal = document.getElementById("typed_word").value;
-    if(inputVal==words[k][2]){              
 
-        return "✓";
-         correct_flag=1;
+  var inputVal = document.getElementById("typed_word").value;
+  var answer=words[k][2];
+  if(inputVal==answer){              
+    correct_flag=1+ correct_flag ;
+    
 
-    }else{
-        return  "☓";
-    }
-
+    return prossAswer(inputVal,answer).concat(" ✓");
+  }else{
+    correct_flag=0;
+      return  prossAswer(inputVal,answer).concat(" ☓");
+  }
+  
 
 }
 
@@ -122,6 +157,77 @@ typed_word.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
     event.preventDefault();
     document.getElementById('feedback').textContent=checkItem();
+
+    if(correct_flag>1){
+      document.getElementById('output').textContent = nextItem();
+    }
+
     }
     
 });
+
+
+
+
+
+
+// -----------------------
+// Zen mode 
+// todo: refactor, looks ugly now
+// -----------------------
+
+function zenFunction() {
+    var hide0 = document.getElementById("myCanvas");
+
+    var hide1 = document.getElementById("fileLabel");
+    var hide2 = document.getElementById("myFile");
+    var hide3 = document.getElementById("prosFileButton");
+    var hide4 = document.getElementById("prosLabel");
+    var hide5 = document.getElementById("prosButton");
+    var hide6 = document.getElementById("myTextarea");
+    if (hide0.style.display == "none") {
+        hide0.style.display = "block";
+      } else {
+        hide0.style.display = "none";
+      }
+  
+    if (hide1.style.display == "none") {
+      hide1.style.display = "block";
+    } else {
+      hide1.style.display = "none";
+    }
+    
+    if (hide2.style.display == "none") {
+        hide2.style.display = "block";
+      } else {
+        hide2.style.display = "none";
+      }
+      
+      if (hide3.style.display == "none") {
+        hide3.style.display = "block";
+      } else {
+        hide3.style.display = "none";
+      }
+      if (hide4.style.display == "none") {
+        hide4.style.display = "block";
+      } else {
+        hide4.style.display = "none";
+      }
+      if (hide5.style.display == "none") {
+        hide5.style.display = "block";
+      } else {
+        hide5.style.display = "none";
+      }
+      if (hide6.style.display == "none") {
+        hide6.style.display = "block";
+      } else {
+        hide6.style.display = "none";
+      }
+      var alignValue = "center";
+
+      var div1 = document.getElementById ("input_output");
+      var div2 = document.getElementById ("buttons");
+      div1.style.textAlign = "center";
+      div2.style.textAlign = "center";
+
+  }
