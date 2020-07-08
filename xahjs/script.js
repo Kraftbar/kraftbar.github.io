@@ -1,6 +1,6 @@
 // TODO
 //   - lower / capital
-//   - create function parse more than one correct answer
+//   - create function parse more than one correct answer, ignore "()" and select on ","
 
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
