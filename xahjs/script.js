@@ -1,6 +1,6 @@
 // TODO
 //   - lower / capital
-//   - create function parse more than one correct answer, ignore "()" and select on ","
+
 
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
@@ -18,6 +18,9 @@ correct_flag=0;
 // -----------------------
 // file/ txts handeling 
 // -----------------------
+
+
+
 
 function pros(csv){
     //reset
@@ -52,24 +55,42 @@ function processFile(){
     }
   }
 
-  function processText(){
+function processText(){
     var x = document.getElementById("myTextarea").value;
     pros(x)
 }
 
 
 // Feedback correct 
-function prossAswer(userInput, solution){
-  var string_feedback="";
-  for (var i = 0; i < solution.length; i++) {
+function prossFeedback(userInput, solutions){
+  highestMatchScores=[];
+  feedbacks=[];
+
+  for (j = 0; j < solutions.length; j++) {
+
+    solution=solutions[j];
+
+    matchScore=0;
+    var feedback="";
+
+    for (var i = 0; i < solution.length; i++) {
       if(userInput.charAt(i)==solution.charAt(i)){
-          string_feedback=string_feedback.concat(userInput.charAt(i));
+        matchScore=matchScore+1;
+        feedback=feedback.concat(userInput.charAt(i));
       }else{
-          string_feedback=string_feedback.concat("_");
+        feedback=feedback.concat("_");
       }
-      
+    }
+
+    feedbacks.push(feedback);
+    highestMatchScores.push(matchScore);
   }
-  return string_feedback;
+
+  // find the highest match
+  var sorted = [...highestMatchScores].sort((a,b) => b - a);
+  highestMatchIndex=highestMatchScores.indexOf(sorted[0]);
+
+  return feedbacks[highestMatchIndex];
 }
 
 // -----------------------
@@ -105,20 +126,18 @@ function prevItem() {
 }
 function checkItem() {
 
-
   var inputVal = document.getElementById("typed_word").value;
-  var answer=words[k][2];
-  if(inputVal==answer){              
-    correct_flag=1+ correct_flag ;
-    
+  var answer=words[k][2].replace(/ *\([^)]*\) */g, ""); //   replace (*)
+  var answers=answer.split(", ");
 
-    return prossAswer(inputVal,answer).concat(" ✓");
-  }else{
-    correct_flag=0;
-      return  prossAswer(inputVal,answer).concat(" ☓");
-  }
+  feedback=prossFeedback(inputVal,answers);
+    if(inputVal==feedback){              
+      correct_flag=correct_flag+1;
+      return feedback.concat(" ✓");
+    }
+      correct_flag=0;
   
-
+    return  feedback.concat(" ☓");
 }
 
 
@@ -157,7 +176,7 @@ typed_word.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
     event.preventDefault();
     document.getElementById('feedback').textContent=checkItem();
-
+    console.log(correct_flag);
     if(correct_flag>1){
       document.getElementById('output').textContent = nextItem();
     }
