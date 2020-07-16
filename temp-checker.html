@@ -201,6 +201,17 @@ function MinY() {
 //   return MinX() * Height / Width;
 }
 
+// Returns the distance between ticks on the X axis:
+function XTickDelta() {
+  return 5 ;
+}
+
+// Returns the distance between ticks on the Y axis:
+function YTickDelta() {
+  return 5 ;
+}
+
+
 // Returns the physical x-coordinate of a logical x-coordinate:
 function XC(x) {
   return (x - MinX()) / (MaxX() - MinX()) * Width ;
@@ -229,27 +240,12 @@ function Draw() {
    // Draw:
    DrawAxes() ;
    RenderFunction(F);
-   
-   
-   
-   
-RenderTable(temps);   
+   RenderTable(temps);   
    
   
   } else {
     // Do nothing.
   }
-}
-
-
-// Returns the distance between ticks on the X axis:
-function XTickDelta() {
-  return 5 ;
-}
-
-// Returns the distance between ticks on the Y axis:
-function YTickDelta() {
-  return 5 ;
 }
 
   
@@ -259,61 +255,43 @@ function DrawAxes() {
  Ctx.lineWidth = 1 ;
  // +Y axis
  Ctx.beginPath() ;
- Ctx.moveTo(XC(0),YC(0)) ;
- Ctx.lineTo(XC(0),YC(MaxY())) ;
+ Ctx.moveTo(XC(MinX()),YC(MinY())) ;
+ Ctx.lineTo(XC(MinX()),YC(MaxY())) ;
+ Ctx.moveTo(XC(MaxX()),YC(MinY())) ;
+ Ctx.lineTo(XC(MaxX()),YC(MaxY())) ;
  Ctx.stroke() ;
 
- // -Y axis
- Ctx.beginPath() ;
- Ctx.moveTo(XC(0),YC(0)) ;
- Ctx.lineTo(XC(0),YC(MinY())) ;
- Ctx.stroke() ;
 
  // Y axis tick marks
  var delta = YTickDelta() ;
- for (var i = 1; (i * delta) < MaxY() ; ++i) {
+ for (var i = MinY() ; (i * delta) < MaxY() ; ++i) {
   Ctx.beginPath() ;
-  Ctx.moveTo(XC(0) - 5,YC(i * delta)) ;
-  Ctx.lineTo(XC(0) + 5,YC(i * delta)) ;
+  Ctx.moveTo(XC(MinX()) - 5,YC(i * delta)) ;
+  Ctx.lineTo(XC(MinX()) + 5,YC(i * delta)) ;
+  Ctx.moveTo(XC(MaxX()) - 5,YC(i * delta)) ;
+  Ctx.lineTo(XC(MaxX()) + 5,YC(i * delta)) ;
   Ctx.stroke() ;  
  }
 
- var delta = YTickDelta() ;
- for (var i = 1; (i * delta) > MinY() ; --i) {
-  Ctx.beginPath() ;
-  Ctx.moveTo(XC(0) - 5,YC(i * delta)) ;
-  Ctx.lineTo(XC(0) + 5,YC(i * delta)) ;
-  Ctx.stroke() ;  
- }  
-
- // +X axis
+ // X axis
  Ctx.beginPath() ;
- Ctx.moveTo(XC(0),YC(0)) ;
- Ctx.lineTo(XC(MaxX()),YC(0)) ;
- Ctx.stroke() ;
-
- // -X axis
- Ctx.beginPath() ;
- Ctx.moveTo(XC(0),YC(0)) ;
- Ctx.lineTo(XC(MinX()),YC(0)) ;
+ Ctx.moveTo(XC(MinX()),YC(MinY())) ;
+ Ctx.lineTo(XC(MaxX()),YC(MinY())) ;
+ Ctx.moveTo(XC(MinX()),YC(MaxY())) ;
+ Ctx.lineTo(XC(MaxX()),YC(MaxY())) ;
  Ctx.stroke() ;
 
  // X tick marks
  var delta = XTickDelta() ;
- for (var i = 1; (i * delta) < MaxX() ; ++i) {
+ for (var i = MinX(); (i * delta) < MaxX() ; ++i) {
   Ctx.beginPath() ;
-  Ctx.moveTo(XC(i * delta),YC(0)-5) ;
-  Ctx.lineTo(XC(i * delta),YC(0)+5) ;
+  Ctx.moveTo(XC(i * delta),YC(MinY())-5) ;
+  Ctx.lineTo(XC(i * delta),YC(MinY())+5) ;
+  Ctx.moveTo(XC(i * delta),YC(MaxY())-5) ;
+  Ctx.lineTo(XC(i * delta),YC(MaxY())+5) ;
   Ctx.stroke() ;  
  }
 
- var delta = XTickDelta() ;
- for (var i = 1; (i * delta) > MinX() ; --i) {
-  Ctx.beginPath() ;
-  Ctx.moveTo(XC(i * delta),YC(0)-5) ;
-  Ctx.lineTo(XC(i * delta),YC(0)+5) ;
-  Ctx.stroke() ;  
- }
  Ctx.restore() ;
 }
 
