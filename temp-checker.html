@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<script type="text/javascript">
+</script>
+
+<head>
+    <title> Title1 </title>
+    <meta name="viewport" content="width=700, maximum-scale=2.0, user-scalable=1">
+    <link href="index.css" rel="stylesheet">
+    <style>
+        div {
+            background-color: #FFEEDD;
+            border: 1px solid #FF8855;
+            padding: 10px;
+        }
+
+        #div1 {
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-radius: 40px;
+        }
+    </style>
+    
+   
+</head>
+
+
+
+<body>
+    <center>
+        <h2>-= Title2 =-</h2>
+    </center>
+    <table align="center">
+        <tr>
+            <td style="width:700px;padding:10px;" align="center">
+
+
+
+
+
+
+<textarea id="function-code"  rows="6" cols="50">var F = function(x) {
+  return Math.sin(x)*Math.cos(2*x)*3 ;
+
+} ;
+</textarea>
+<input type="button" onclick="Draw();" value="Draw!">
+
+<canvas id="xy-graph" width="535" height="1200">
+  CANVAS NOT SUPPORTED IN THIS BROWSER!
+</canvas>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </td>
+        </tr>
+    </table>
+
+
+
+
+</body>
+
+ <script>
+
+
+var temps = [];
+
+ function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+
+
+    var a =httpGet("https://api.met.no/weatherapi/probabilityforecast/1.1/?lat=59.90&lon=10.69");
+
+    parser = new DOMParser();
+    xmlDoc = parser.parseFromString(a, "text/xml");
+
+    x=xmlDoc.getElementsByTagName("time");
+
+
+    var from;
+    var to;
+    var temp;
+    for (i = 0; i < x.length; i++) {
+        from=x[i].getAttribute("from");
+        to=x[i].getAttribute("to");
+        temp=x[i].getElementsByTagName("probability")[4].getAttribute("value");
+        if(temp>8){
+        temps.push(temp);        
+        }
+    }
+
+
+
+
+/* ------------------------------------------------------------------------------------------*/
+
+
+
+/* Initialization */
+
+// To be called when the page finishes loading:
+function init() {
+ Draw() ;
+}
+
+
+/* Canvas and context objects */
+
+var Canvas = document.getElementById('xy-graph');  
+var Ctx = null ;
+
+var Width = Canvas.width ;
+var Height = Canvas.height ;
+
+
+
+/*
+  The origin (0,0) of the canvas is the upper left:
+
+  (0,0)
+    --------- +X
+   |
+   |
+   |
+   |
+   +Y
+
+  Positive x coordinates go to the right, and positive y coordinates go down.
+
+  The origin in mathematics is the "center," and positive y goes *up*.
+
+  We'll refer to the mathematics coordinate system as the "logical"
+  coordinate system, and the coordinate system for the canvas as the
+  "physical" coordinate system.
+
+  The functions just below set up a mapping between the two coordinate
+  systems.
+
+  They're defined as functions, so that one wanted to, they could read
+  ther values from a from instead of having them hard-coded.
+ 
+ */
+
+
+function MaxX() {
+  return 10 ;
+}
+
+function MinX() {
+  return -10 ;
+}
+
+function MaxY() {
+    return 22;
+//  return MaxX() * Height / Width;
+}
+
+function MinY() {
+   return -3    ;
+//   return MinX() * Height / Width;
+}
+
+// Returns the physical x-coordinate of a logical x-coordinate:
+function XC(x) {
+  return (x - MinX()) / (MaxX() - MinX()) * Width ;
+}
+
+// Returns the physical y-coordinate of a logical y-coordinate:
+function YC(y) {
+  return Height - (y - MinY()) / (MaxY() - MinY()) * Height ;
+}
+
+
+/* Rendering functions */
+
+// Clears the canvas, draws the axes and graphs the function F.
+function Draw() {
+
+ // Evaluate the user-supplied code, which must bind a value to F.
+ eval(document.getElementById('function-code').value) ;
+ 
+ if (Canvas.getContext) {
+  
+   // Set up the canvas:
+   Ctx = Canvas.getContext('2d');
+   Ctx.clearRect(0,0,Width,Height) ;
+
+   // Draw:
+   DrawAxes() ;
+   RenderFunction(F);
+   
+   
+   
+   
+RenderTable(temps);   
+   
+  
+  } else {
+    // Do nothing.
+  }
+}
+
+
+// Returns the distance between ticks on the X axis:
+function XTickDelta() {
+  return 5 ;
+}
+
+// Returns the distance between ticks on the Y axis:
+function YTickDelta() {
+  return 5 ;
+}
+
+  
+// DrawAxes draws the X ad Y axes, with tick marks.
+function DrawAxes() {
+ Ctx.save() ;
+ Ctx.lineWidth = 1 ;
+ // +Y axis
+ Ctx.beginPath() ;
+ Ctx.moveTo(XC(0),YC(0)) ;
+ Ctx.lineTo(XC(0),YC(MaxY())) ;
+ Ctx.stroke() ;
+
+ // -Y axis
+ Ctx.beginPath() ;
+ Ctx.moveTo(XC(0),YC(0)) ;
+ Ctx.lineTo(XC(0),YC(MinY())) ;
+ Ctx.stroke() ;
+
+ // Y axis tick marks
+ var delta = YTickDelta() ;
+ for (var i = 1; (i * delta) < MaxY() ; ++i) {
+  Ctx.beginPath() ;
+  Ctx.moveTo(XC(0) - 5,YC(i * delta)) ;
+  Ctx.lineTo(XC(0) + 5,YC(i * delta)) ;
+  Ctx.stroke() ;  
+ }
+
+ var delta = YTickDelta() ;
+ for (var i = 1; (i * delta) > MinY() ; --i) {
+  Ctx.beginPath() ;
+  Ctx.moveTo(XC(0) - 5,YC(i * delta)) ;
+  Ctx.lineTo(XC(0) + 5,YC(i * delta)) ;
+  Ctx.stroke() ;  
+ }  
+
+ // +X axis
+ Ctx.beginPath() ;
+ Ctx.moveTo(XC(0),YC(0)) ;
+ Ctx.lineTo(XC(MaxX()),YC(0)) ;
+ Ctx.stroke() ;
+
+ // -X axis
+ Ctx.beginPath() ;
+ Ctx.moveTo(XC(0),YC(0)) ;
+ Ctx.lineTo(XC(MinX()),YC(0)) ;
+ Ctx.stroke() ;
+
+ // X tick marks
+ var delta = XTickDelta() ;
+ for (var i = 1; (i * delta) < MaxX() ; ++i) {
+  Ctx.beginPath() ;
+  Ctx.moveTo(XC(i * delta),YC(0)-5) ;
+  Ctx.lineTo(XC(i * delta),YC(0)+5) ;
+  Ctx.stroke() ;  
+ }
+
+ var delta = XTickDelta() ;
+ for (var i = 1; (i * delta) > MinX() ; --i) {
+  Ctx.beginPath() ;
+  Ctx.moveTo(XC(i * delta),YC(0)-5) ;
+  Ctx.lineTo(XC(i * delta),YC(0)+5) ;
+  Ctx.stroke() ;  
+ }
+ Ctx.restore() ;
+}
+
+
+// When rendering, XSTEP determines the horizontal distance between points:
+var XSTEP = (MaxX()-MinX())/Width ;
+
+
+
+// RenderFunction(f) renders the input funtion f on the canvas.
+function RenderFunction(f) {
+  var first = true;
+
+  Ctx.beginPath() ;
+  for (var x = MinX(); x <= MaxX(); x += XSTEP) {
+   var y = f(x) ;
+   if (first) {
+    Ctx.moveTo(XC(x),YC(y)) ;
+    first = false ;
+   } else {
+    Ctx.lineTo(XC(x),YC(y)) ;
+   }
+  }
+  Ctx.stroke() ;
+}
+
+function RenderTable(table) {
+
+  var first = true;
+    var XSTEPTABLE = 1 ;
+
+  Ctx.beginPath() ;
+  teller=0;
+  for (var x = MinX(); x <= MaxX(); x += XSTEPTABLE) {
+    var y = temps[teller];
+   if (first) {
+    Ctx.moveTo(XC(x),YC(y)) ;
+    first = false ;
+   } else {
+    Ctx.lineTo(XC(x),YC(y)) ;
+   }
+   teller=teller+1;
+  }
+  Ctx.stroke() ;
+}
+
+
+init() 
+    </script>
+    
+
+</html>
