@@ -39,14 +39,7 @@
 
 
 
-<textarea id="function-code"  rows="6" cols="50">var F = function(x) {
-  return Math.sin(x)*Math.cos(2*x)*3 +10 ;
-
-} ;
-</textarea>
-<input type="button" onclick="Draw();" value="Draw!">
-
-<canvas id="xy-graph" width="535" height="1200">
+<canvas id="xy-graph" width="700" height="400">
   CANVAS NOT SUPPORTED IN THIS BROWSER!
 </canvas>
 
@@ -97,6 +90,12 @@
 </body>
 
  <script>
+
+
+// TODO:
+// - dates
+
+
 
 
 var temps = [];
@@ -184,7 +183,7 @@ var Height = Canvas.height ;
 
 
 function MaxX() {
-    return 20;
+    return temps.length-1;
 }
 
 function MinX() {
@@ -192,7 +191,7 @@ function MinX() {
 }
 
 function MaxY() {
-    return 22;
+    return 23;
 //  return MaxX() * Height / Width;
 }
 
@@ -209,7 +208,7 @@ function XTickDelta() {
 // Returns the distance between ticks on the Y axis:
 function YTickDelta() {
     return 5;
-}
+}   
 
 class funcProps{
     constructor(builder) {
@@ -221,7 +220,7 @@ class funcProps{
       this.YTickDelta= 5;
       }
 }
-
+var lol = new funcProps();
 
 
 
@@ -243,7 +242,11 @@ function YC(y) {
 function Draw() {
 
     // Evaluate the user-supplied code, which must bind a value to F.
-    eval(document.getElementById('function-code').value) ;
+    //    eval(document.getElementById('function-code').value) ;
+    var F = function(x) {
+      return Math.sin(x)*Math.cos(2*x)*3 +10 ;
+
+    } ;
 
 
     // Set up the canvas:
@@ -254,19 +257,37 @@ function Draw() {
     // set
 
     // Draw:
-    DrawAxes() ;
     RenderFunction(F);
     RenderTable(temps);   
 
+    DrawAxes() ;
 
 
+}
+
+
+function DrawTops(table) {
+    int nedover =0;
+    var delta = YTickDelta()+delta;
+    for (var i= 1; i < table.length ; i=i+1) {
+        if(table[i-1]>table[i])[{
+            
+        }
+    }    
 }
 
   
 // DrawAxes draws the X ad Y axes, with tick marks.
 function DrawAxes() {
+
+// take inn function object and set vars to obj vars
     Ctx.save() ;
     Ctx.lineWidth = 1 ;
+
+
+
+    Ctx.font = "bold 11px verdana, sans-serif";
+
 
     // +Y axis
     Ctx.beginPath() ;
@@ -276,14 +297,26 @@ function DrawAxes() {
     Ctx.lineTo(XC(MaxX()),YC(MaxY())) ;
     Ctx.stroke() ;
     // Y axis tick marks
-    var delta = YTickDelta() ;
-    for (var y_t = MinY() ; y_t  < MaxY() ; y_t=y_t+delta) {
+    var delta = YTickDelta();
+    for (var y_t = MinY()+delta ; y_t  < MaxY() ; y_t=y_t+delta) {
         Ctx.beginPath() ;
         Ctx.moveTo(XC(MinX()) - 5,YC(y_t )) ;
         Ctx.lineTo(XC(MinX()) + 5,YC(y_t )) ;
         Ctx.moveTo(XC(MaxX()) - 5,YC(y_t )) ;
         Ctx.lineTo(XC(MaxX()) + 5,YC(y_t )) ;
+        Ctx.moveTo(XC(MaxX()) - 5,YC(y_t )) ;
+        Ctx.lineTo(XC(MaxX()) + 5,YC(y_t )) ;
         Ctx.stroke() ;  
+        
+        Ctx.beginPath() ;
+        Ctx.lineWidth = 0.5; 
+        Ctx.strokeStyle = 'gray';
+        Ctx.fillText(y_t, XC(MinX()) , YC(y_t +0.1));
+        Ctx.moveTo(XC(MinX()),YC( y_t)) ;
+        Ctx.lineTo(XC(MaxX()),YC(y_t)) ;
+        Ctx.stroke() ;  
+        Ctx.lineWidth = 1; 
+        Ctx.strokeStyle = 'black';
     }
 
     // X axis
@@ -295,13 +328,24 @@ function DrawAxes() {
     Ctx.stroke() ;
     // X tick marks
     var delta = XTickDelta() ;
-    for (var x_t = MinX(); x_t < MaxX() ; x_t=x_t+delta) {
+    for (var x_t = MinX()+delta; x_t < MaxX() ; x_t=x_t+delta) {
         Ctx.beginPath() ;
         Ctx.moveTo(XC(x_t ),YC(MinY())-5) ;
         Ctx.lineTo(XC(x_t ),YC(MinY())+5) ;
         Ctx.moveTo(XC(x_t ),YC(MaxY())-5) ;
         Ctx.lineTo(XC(x_t ),YC(MaxY())+5) ;
         Ctx.stroke() ;  
+
+
+        Ctx.beginPath() ;
+        Ctx.lineWidth = 0.5; 
+        Ctx.strokeStyle = 'gray';
+        Ctx.fillText(x_t, XC(x_t +0.1) , YC(MinY()+0.1));
+        Ctx.moveTo(XC(x_t),YC( MinY())) ;
+        Ctx.lineTo(XC(x_t),YC(MaxY())) ;
+        Ctx.stroke() ;  
+        Ctx.lineWidth = 1; 
+        Ctx.strokeStyle = 'black';
     }
 
     Ctx.restore() ;
