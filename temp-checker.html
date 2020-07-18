@@ -99,6 +99,9 @@
 
 
 var temps = [];
+var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+var tempDays = [];
+var newDays= [];
 
  function httpGet(theUrl)
 {
@@ -120,13 +123,28 @@ var temps = [];
     var from;
     var to;
     var temp;
+    prevDayFrom=x[0].getAttribute("from");
+    prevDay= new Date(prevDayFrom)
     for (i = 0; i < x.length; i++) {
         from=x[i].getAttribute("from");
         to=x[i].getAttribute("to");
+        dateobj = new Date(from)
         temp=x[i].getElementsByTagName("probability")[4].getAttribute("value");
         if(temp>8){
-        temps.push(temp);        
+            temps.push(temp);        
+            tempDays.push(dateobj.getDay());
+            if(prevDay.getDay()!=dateobj.getDay()){
+                newDays.push(i);
+            }
         }
+        
+        if(prevDay.getDay()!=dateobj.getDay()){
+        }        
+        console.log(x[i].getElementsByTagName("probability")[4].getAttribute("value"));
+        
+        
+        prevDay=dateobj;
+
     }
 
 
@@ -191,7 +209,7 @@ function MinX() {
 }
 
 function MaxY() {
-    return 23;
+    return 26;
 //  return MaxX() * Height / Width;
 }
 
@@ -202,7 +220,7 @@ function MinY() {
 
 // Returns the distance between ticks on the X axis:
 function XTickDelta() {
-    return 5;
+    return 4;
 }
 
 // Returns the distance between ticks on the Y axis:
@@ -244,7 +262,7 @@ function Draw() {
     // Evaluate the user-supplied code, which must bind a value to F.
     //    eval(document.getElementById('function-code').value) ;
     var F = function(x) {
-      return Math.sin(x)*Math.cos(2*x)*3 +10 ;
+      return Math.sin(x)*Math.cos(2*x)*1 +9 ;
 
     } ;
 
@@ -266,13 +284,11 @@ function Draw() {
 }
 
 
-function DrawTops(table) {
-    var delta = YTickDelta()+delta;
-    for (var i= 1; i < table.length ; i=i+1) {
-        if(table[i-1]>table[i]){
-            
-        }
-    }    
+
+function drawDays(table) {
+
+// find first day 
+
 }
 
   
@@ -326,22 +342,27 @@ function DrawAxes() {
     Ctx.lineTo(XC(MaxX()),YC(MaxY())) ;
     Ctx.stroke() ;
     // X tick marks
+    newdate=0;
     var delta = XTickDelta() ;
-    for (var x_t = MinX()+delta; x_t < MaxX() ; x_t=x_t+delta) {
+    for (var i = 0; i < newDays.length ; i++) {
         Ctx.beginPath() ;
-        Ctx.moveTo(XC(x_t ),YC(MinY())-5) ;
-        Ctx.lineTo(XC(x_t ),YC(MinY())+5) ;
-        Ctx.moveTo(XC(x_t ),YC(MaxY())-5) ;
-        Ctx.lineTo(XC(x_t ),YC(MaxY())+5) ;
+        Ctx.moveTo(XC(newDays[i] ),YC(MinY())-5) ;
+        Ctx.lineTo(XC(newDays[i] ),YC(MinY())+5) ;
+        Ctx.moveTo(XC(newDays[i] ),YC(MaxY())-5) ;
+        Ctx.lineTo(XC(newDays[i] ),YC(MaxY())+5) ;
         Ctx.stroke() ;  
 
+        if(i!=newDays.length -1){
+            Ctx.font = "bold 9px verdana, sans-serif";
+            Ctx.textAlign = "center";
+            Ctx.fillText(days[tempDays[newDays[i]]], XC(newDays[i] +2) , YC(MinY()+0.1));
+        }
 
         Ctx.beginPath() ;
         Ctx.lineWidth = 0.5; 
         Ctx.strokeStyle = 'gray';
-        Ctx.fillText(x_t, XC(x_t +0.1) , YC(MinY()+0.1));
-        Ctx.moveTo(XC(x_t),YC( MinY())) ;
-        Ctx.lineTo(XC(x_t),YC(MaxY())) ;
+        Ctx.moveTo(XC(newDays[i]),YC( MinY())) ;
+        Ctx.lineTo(XC(newDays[i]),YC(MaxY())) ;
         Ctx.stroke() ;  
         Ctx.lineWidth = 1; 
         Ctx.strokeStyle = 'black';
