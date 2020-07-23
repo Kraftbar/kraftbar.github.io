@@ -1,5 +1,6 @@
 // TODO
 //   - lower / capital
+//   - switch input / output 
 
 
 var c = document.getElementById("myCanvas");
@@ -11,9 +12,12 @@ ctx.fillText("Hello World", 10, 50);
 // globals 
 
 var words = new Array(1000);
+var words_buffer = new Array(1000);
+var words_pinyin_woAccents = new Array(1000);
 var words_empt=words;
 var words_length=0;
 correct_flag=0;
+standardLang_flag=1;
 
 // -----------------------
 // file/ txts handeling 
@@ -27,8 +31,14 @@ function pros(csv){
     k=0;
     words=words_empt;
 
+    // remove trailing newline 
+
+    csv=csv.replace(/\n+$/, "");
+
     var rows = csv.split('\n');
-    rows.pop(); // last one is null
+
+
+
     for (var i = 0; i < rows.length; i++) {
       cols = rows[i].split('\t');
       words[i] = new Array(3);
@@ -37,6 +47,8 @@ function pros(csv){
         console.log(value)
         words[i][j] = value;
       }
+      woAccents=cols[1].normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+      words_pinyin_woAccents[i]=woAccents;
       words_length=i;
     }
     document.getElementById('output').innerHTML = words[k][0]+" "+words[k][1];
@@ -187,15 +199,41 @@ typed_word.addEventListener("keyup", function(event) {
 
 
 
+// -----------------------
+// Misc. 
+// -----------------------
 
+
+function changeLangFunction() {
+
+    words=words_empt;
+
+    for (var i = 0; i < words_length; i++) {
+        if(standardLang_flag){
+        words_buffer[i]=words[i][1];
+        words[i][1]="";
+
+        }else{
+
+        words[i][1]=words_buffer[i];
+        }
+        [words[i][0], words[i][2]] = [words[i][2], words[i][0]];
+
+    }
+
+
+    // toggle boolean
+    standardLang_flag=!standardLang_flag;
+
+}
 
 
 // -----------------------
-// Zen mode 
+// focus mode 
 // todo: refactor, looks ugly now
 // -----------------------
 
-function zenFunction() {
+function focusFunction() {
     var hide0 = document.getElementById("myCanvas");
 
     var hide1 = document.getElementById("fileLabel");
