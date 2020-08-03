@@ -114,8 +114,10 @@ function prossFeedback(userInput, solutions){
 function nextItem() {
     document.getElementById('feedback').innerHTML="<br/>";
     
-    k = k + 1; 
-    k = k % words_length; 
+
+    
+    k = Math.floor(Math.random()*(words_length+1)); // k+1 
+    k = k % (words_length+1); 
 
     var inputF = document.getElementById("typed_word"); 
     inputF.value = ""; 
