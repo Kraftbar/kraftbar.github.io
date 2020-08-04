@@ -38,6 +38,7 @@ function pros(csv){
     var rows = csv.split('\n');
 
 
+    words_length=rows.length;
 
     for (var i = 0; i < rows.length; i++) {
       cols = rows[i].split('\t');
@@ -49,7 +50,6 @@ function pros(csv){
       }
       woAccents=cols[1].normalize("NFD").replace(/[\u0300-\u036f]/g, "");
       words_pinyin_woAccents[i]=woAccents;
-      words_length=i;
     }
     document.getElementById('output').innerHTML = words[k][0]+" "+words[k][1];
     
@@ -116,8 +116,8 @@ function nextItem() {
     
 
     
-    k = Math.floor(Math.random()*(words_length+1)); // k+1 
-    k = k % (words_length+1); 
+    k = Math.floor(Math.random()*(words_length)); // k+1 
+    k = k % (words_length); 
 
     var inputF = document.getElementById("typed_word"); 
     inputF.value = ""; 
