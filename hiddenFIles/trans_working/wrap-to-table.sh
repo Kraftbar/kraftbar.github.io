@@ -2,13 +2,11 @@
 
 
 echo -n "" > output
-filename='input'
-n=1
-while read line; do
-./gt.sh line >> output
-n=$((n+1))
-done < $filename
 
+while IFS= read  -r line
+do
+./gt.sh $line >> output
+done < input
 
 
 cat output | awk -v FS='\t' '
