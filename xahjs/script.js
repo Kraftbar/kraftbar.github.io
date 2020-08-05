@@ -1,6 +1,6 @@
 // TODO
 //   - lower / capital
-//   - switch input / output 
+//   - falshcard button
 
 
 var c = document.getElementById("myCanvas");
