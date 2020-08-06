@@ -19,6 +19,8 @@ var words_length=0;
 correct_flag=0;
 standardLang_flag=1;
 
+falshcard_toggle=0;
+
 // -----------------------
 // file/ txts handeling 
 // -----------------------
