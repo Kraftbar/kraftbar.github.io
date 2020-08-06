@@ -111,7 +111,17 @@ function prossFeedback(userInput, solutions){
 // display word array 
 // -----------------------
 
-
+function nextFlashcard(){
+  if (falshcard_toggle){
+    document.getElementById('output').textContent=words[k][0]+" "+words[k][1];
+    document.getElementById('feedback').innerHTML="<br/>";
+  }else{
+    document.getElementById('feedback').textContent = words[k][2];
+    k =  k+1 
+    k = k % (words_length); 
+  }
+  falshcard_toggle=!falshcard_toggle;
+}
 
 function nextItem() {
     document.getElementById('feedback').innerHTML="<br/>";
