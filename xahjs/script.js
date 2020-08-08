@@ -216,7 +216,10 @@ typed_word.addEventListener("keyup", function(event) {
 // -----------------------
 // Misc. 
 // -----------------------
-
+function text2speech(){
+  var msg = new SpeechSynthesisUtterance(words[k][0]);msg.lang = 'zh-CN';
+window.speechSynthesis.speak(msg);
+}
 
 function changeLangFunction() {
 
@@ -234,6 +237,16 @@ function changeLangFunction() {
         [words[i][0], words[i][2]] = [words[i][2], words[i][0]];
 
     }
+
+
+    // hide speech
+    var speechDiv = document.getElementById("text2speech");
+    if (speechDiv.style.display === "none") {
+      speechDiv.style.display = "block";
+    } else {
+      speechDiv.style.display = "none";
+    }
+
 
 
     // toggle boolean
