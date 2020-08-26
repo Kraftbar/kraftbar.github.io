@@ -152,7 +152,7 @@ function prevItem() {
 }
 function checkItem() {
 
-  var inputVal = document.getElementById("typed_word").value;
+  var inputVal = document.getElementById("typed_word").value.toLowerCase();;
   var answer=words[k][2].replace(/ *\([^)]*\) */g, ""); //   replace (*)
   var answers=answer.split(", ");
 
