@@ -25,17 +25,3 @@ async function loadJson(url) {
   }
   alert("HTTP-Error: " + response.status);
 }
-
-
-// -- xml (not working) --- 
-function loadDoc(theUrl) {
-  var xhttp = new XMLHttpRequest();
-  xhttp.onreadystatechange = function() {
-  if (xhttp.readyState == 4 && xhttp.status == 200) {
-    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
-    xmlHttp.send( null );
-    return xmlHttp.responseText;
-    }
-    alert("HTTP-Error: " + xhttp.status);
-
-};
