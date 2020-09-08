@@ -1,17 +1,33 @@
 // ------------------------------------------------------------------------- 
-// --------------------------------  sync  ---------------------------------
+// -------------------------------- syconus  -------------------------------
 // ------------------------------------------------------------------------- 
+// -- xml --- 
+ function httpGet(url)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", url, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
 
 
 
 
 // ------------------------------------------------------------------------- 
-// -------------------------------  a-sync  --------------------------------
-// ------------------------------------------------------------------------- 
-const response = await fetch(
-  "https://jsonplaceholder.typicode.com/todos"
-);
-const body = await response.json();
+// --------------------------------  async  --------------------------------
+// -------------------------------------------------------------------------
+// -- json -- 
+async function loadJson(url) { 
+  let response = await fetch(url);
+  if (response.ok) {
+    let json = await response.json(); 
+    return json;
+  }
+  alert("HTTP-Error: " + response.status);
+}
+
+
+
 
 
 // ------------------------------------------------------------------------- 
