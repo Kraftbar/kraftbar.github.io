@@ -7,8 +7,6 @@ class canvasplot{
     // ------------------------------------------------------------------------- 
     constructor(Canvas_name) {
         this.Canvas = document.getElementById('xy-graph');  
-        console.log(this.Canvas);
-        console.log(this.Canvas);
         this.Width  = this.Canvas.width ;
         this.Height = this.Canvas.height ;
         this.MaxX= 20;
@@ -51,7 +49,6 @@ class canvasplot{
     // --------------------------------- axis ----------------------------------
     // ------------------------------------------------------------------------- 
     DrawAxes(Ctx) {
-
         Ctx.save() ;
         Ctx.lineWidth = 1 ;
         Ctx.font = "bold 11px verdana, sans-serif";
@@ -110,6 +107,7 @@ class canvasplot{
             Ctx.strokeStyle = 'gray';
             Ctx.moveTo(this.XC(x_t),this.YC( this.MinY)) ;
             Ctx.lineTo(this.XC(x_t),this.YC(this.MaxY)) ;
+            Ctx.fillText(x_t,  this.XC(x_t +0.1), this.YC(this.MinY+0.2));
             Ctx.stroke() ;  
             Ctx.lineWidth = 1; 
             Ctx.strokeStyle = 'black';
@@ -124,7 +122,6 @@ class canvasplot{
     // ------------------------------------------------------------------------- 
     // --------------------------------- func ----------------------------------
     // ------------------------------------------------------------------------- 
-
     RenderFunction(f,Ctx) {
         var first = true;
         Ctx.beginPath() ;
