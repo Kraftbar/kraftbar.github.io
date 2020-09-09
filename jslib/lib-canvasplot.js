@@ -1,5 +1,4 @@
 
-
 class canvasplot{
     
     // ------------------------------------------------------------------------- 
@@ -12,7 +11,7 @@ class canvasplot{
         this.MaxX= 20;
         this.MinX= 0;
         this.MaxY= 22;
-        this.MinY= 5;
+        this.MinY= 0;
         this.XTickDelta= 5;
         this.YTickDelta= 5;
         this.XSTEP = (this.MaxX-this.MinX)/this.Width ;
@@ -31,14 +30,14 @@ class canvasplot{
     Draw() {
         var F = function(x) {
           return Math.sin(x)*Math.cos(2*x)*1 +9 ;
-
         };
         var Ctx = null ;
-
         Ctx = this.Canvas.getContext('2d');
         Ctx.clearRect(0,0,this.Width,this.Height) ;
 
-        this.RenderFunction(F,Ctx);
+//        this.RenderFunction(F,Ctx);
+        var arr=[1,2,3,4,1,2,3,4,1,2,3,4];
+        this.RenderArr(arr,Ctx);
         this.DrawAxes(Ctx) ;
     }
 
@@ -127,6 +126,25 @@ class canvasplot{
         Ctx.beginPath() ;
         for (var x = this.MinX; x <= this.MaxX; x += this.XSTEP) {
             var y = f(x) ;
+            if (first) {
+                Ctx.moveTo(this.XC(x),this.YC(y)) ;
+                first = false ;
+            } else {
+                Ctx.lineTo(this.XC(x),this.YC(y)) ;
+            }
+        }
+        Ctx.stroke() ;
+    }
+
+    RenderArr(arr_y,Ctx) {
+        var first = true;
+        Ctx.beginPath();
+        var MinX=0;
+        var MaxX=arr_y.length-1; 
+        var XSTEP=1;
+        for (var x = MinX; x <= MaxX; x += XSTEP) {
+            var y = arr_y[x] ;
+            console.log(x +"  " +y);
             if (first) {
                 Ctx.moveTo(this.XC(x),this.YC(y)) ;
                 first = false ;
