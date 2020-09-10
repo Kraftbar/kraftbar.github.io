@@ -25,3 +25,12 @@ async function loadJson(url) {
   }
   alert("HTTP-Error: " + response.status);
 }
+
+// -- csv --- 
+async function getData(url) {
+  const response = await fetch(url);
+  const table = await response.text();
+  return table;
+}
+
+
