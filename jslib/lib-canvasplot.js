@@ -8,12 +8,12 @@ class canvasplot{
         this.Canvas = document.getElementById('xy-graph');  
         this.Width  = this.Canvas.width ;
         this.Height = this.Canvas.height ;
-        this.MaxX= 20;
+        this.MaxX= 200;
         this.MinX= 0;
-        this.MaxY= 22;
+        this.MaxY= 450;
         this.MinY= 0;
-        this.XTickDelta= 5;
-        this.YTickDelta= 5;
+        this.XTickDelta= 20;
+        this.YTickDelta= 50;
         this.XSTEP = (this.MaxX-this.MinX)/this.Width ;
     }
 
@@ -27,7 +27,7 @@ class canvasplot{
     // ------------------------------------------------------------------------- 
     // --------------------------------- init ----------------------------------
     // ------------------------------------------------------------------------- 
-    Draw() {
+    Draw(arr) {
         var F = function(x) {
           return Math.sin(x)*Math.cos(2*x)*1 +9 ;
         };
@@ -36,7 +36,6 @@ class canvasplot{
         Ctx.clearRect(0,0,this.Width,this.Height) ;
 
 //        this.RenderFunction(F,Ctx);
-        var arr=[1,2,3,4,1,2,3,4,1,2,3,4];
         this.RenderArr(arr,Ctx);
         this.DrawAxes(Ctx) ;
     }
@@ -106,7 +105,7 @@ class canvasplot{
             Ctx.strokeStyle = 'gray';
             Ctx.moveTo(this.XC(x_t),this.YC( this.MinY)) ;
             Ctx.lineTo(this.XC(x_t),this.YC(this.MaxY)) ;
-            Ctx.fillText(x_t,  this.XC(x_t +0.1), this.YC(this.MinY+0.2));
+            Ctx.fillText(x_t,  this.XC(x_t +0.1), this.YC(this.MaxY-13));
             Ctx.stroke() ;  
             Ctx.lineWidth = 1; 
             Ctx.strokeStyle = 'black';
@@ -135,8 +134,13 @@ class canvasplot{
         }
         Ctx.stroke() ;
     }
-
+    
+    
+    
+    // set XmaX and YmaX
     RenderArr(arr_y,Ctx) {
+        this.MinX=-10
+        this.MaxX=arr_y.length+10
         var first = true;
         Ctx.beginPath();
         var MinX=0;
