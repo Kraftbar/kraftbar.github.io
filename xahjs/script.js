@@ -1,6 +1,6 @@
 // TODO
 //   - lower / capital
-//   - falshcard button
+//   - bug: flashcard and text2speech
 
 
 var c = document.getElementById("myCanvas");
