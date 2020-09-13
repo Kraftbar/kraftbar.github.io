@@ -4,16 +4,16 @@ class canvasplot{
     // ------------------------------------------------------------------------- 
     // --------------------------------- costr ---------------------------------
     // ------------------------------------------------------------------------- 
-    constructor(Canvas_name) {
-        this.Canvas = document.getElementById('xy-graph');  
+    constructor(XTickDelta= 20,YTickDelta=50,CanvasName='xy-graph') {
+        this.Canvas = document.getElementById(CanvasName);  
         this.Width  = this.Canvas.width ;
         this.Height = this.Canvas.height ;
+        this.XTickDelta= XTickDelta;
+        this.YTickDelta= YTickDelta;
         this.MaxX= 200;
         this.MinX= 0;
         this.MaxY= 450;
         this.MinY= 0;
-        this.XTickDelta= 20;
-        this.YTickDelta= 50;
         this.XSTEP = (this.MaxX-this.MinX)/this.Width ;
     }
 
@@ -105,7 +105,7 @@ class canvasplot{
             Ctx.strokeStyle = 'gray';
             Ctx.moveTo(this.XC(x_t),this.YC( this.MinY)) ;
             Ctx.lineTo(this.XC(x_t),this.YC(this.MaxY)) ;
-            Ctx.fillText(x_t,  this.XC(x_t +0.1), this.YC(this.MaxY-13));
+            Ctx.fillText(x_t,  this.XC(x_t +0.1), this.YC(this.MaxY)+10);
             Ctx.stroke() ;  
             Ctx.lineWidth = 1; 
             Ctx.strokeStyle = 'black';
@@ -139,9 +139,9 @@ class canvasplot{
     
     // set XmaX and YmaX
     RenderArr(arr_y,Ctx) {
-        this.MinX=-10;
-        this.MaxX=arr_y.length+10;
-        this.YmaX=Math.max(arr_y)*1.2;
+        this.MinX=-5    ;
+        this.MaxX= arr_y.length+5;
+        this.MaxY=Math.max(...arr_y)*1.1;
         var first = true;
         Ctx.beginPath();
         var MinX=0;

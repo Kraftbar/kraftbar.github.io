@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<script type="text/javascript">
+</script>
+
+<head>
+    <title> Title1 </title>
+    <meta name="viewport" content="width=700, maximum-scale=2.0, user-scalable=1">
+    <link href="index.css" rel="stylesheet">
+    <style>
+    </style>   
+</head>
+
+
+
+<body>
+    <center>
+        <h2>-= Title2 =-</h2>
+    </center>
+    <table align="center">
+        <tr>
+            <td style="width:700px;padding:10px;" align="center">
+
+<canvas id="xy-graph" width="700" height="400">
+  CANVAS NOT SUPPORTED IN THIS BROWSER!
+</canvas>
+
+
+            </td>
+        </tr>
+    </table>
+
+</body>
+
+<script src="jslib/lib-request.js"></script>
+<script src="jslib/lib-canvasplot.js"></script>
+ <script>
+
+    // --------------------------------------------------------------
+    var temps = [];
+    var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var tempDays = [];
+    var newDays= [];
+    var from;
+    var to;
+    var temp;
+
+    // --------------------------------------------------------------
+    var a =httpGet("https://api.met.no/weatherapi/probabilityforecast/1.1/?lat=59.90&lon=10.69");
+
+    // --------------------------------------------------------------
+    parser = new DOMParser();
+    xmlDoc = parser.parseFromString(a, "text/xml");
+    x=xmlDoc.getElementsByTagName("time");
+    prevDayFrom=x[0].getAttribute("from");
+    prevDay= new Date(prevDayFrom)
+    for (i = 0; i < x.length; i++) {
+        from=x[i].getAttribute("from");
+        to=x[i].getAttribute("to");
+        dateobj = new Date(from)
+        temp=x[i].getElementsByTagName("probability")[4].getAttribute("value");
+        if(temp>8){
+            temps.push(temp);        
+            tempDays.push(dateobj.getDay());
+            if(prevDay.getDay()!=dateobj.getDay()){
+                newDays.push(i);
+            }
+        }
+        
+        if(prevDay.getDay()!=dateobj.getDay()){
+        }        
+        prevDay=dateobj;
+
+    }
+
+
+    // --------------------------------------------------------------
+    class datecanvasplot extends canvasplot{
+
+
+    }
+
+    // --------------------------------------------------------------
+    let obj = new canvasplot(5,5)
+
+    obj.Draw(temps)
+
+</script>
+    
+
+</html>
