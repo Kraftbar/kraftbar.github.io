@@ -5,7 +5,7 @@
  function httpGet(url)
 {
     var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", url, false ); // false for synchronous request
+    xmlHttp.open( "GET", url, false ); 
     xmlHttp.send( null );
     return xmlHttp.responseText;
 }
@@ -24,13 +24,6 @@ async function loadJson(url) {
     return json;
   }
   alert("HTTP-Error: " + response.status);
-}
-
-// -- csv --- 
-async function getData(url) {
-  const response = await fetch(url);
-  const table = await response.text();
-  return table;
 }
 
 

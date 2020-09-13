@@ -139,8 +139,9 @@ class canvasplot{
     
     // set XmaX and YmaX
     RenderArr(arr_y,Ctx) {
-        this.MinX=-10
-        this.MaxX=arr_y.length+10
+        this.MinX=-10;
+        this.MaxX=arr_y.length+10;
+        this.YmaX=Math.max(arr_y)*1.2;
         var first = true;
         Ctx.beginPath();
         var MinX=0;
