@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<script type="text/javascript">
+</script>
+
+<head>
+    <title> Title1 </title>
+    <meta name="viewport" content="width=700, maximum-scale=2.0, user-scalable=1">
+    <link href="index.css" rel="stylesheet">
+    <style>
+ul {padding-left: 10px;}
+
+li {
+  display: block;
+  padding-left: 25px;
+  padding-top: 2px;
+}
+
+.tdropbtn {
+  color: blue;
+  padding-left: 8px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.tdropdown-content {
+  display: none;
+  position: relative;
+  min-width: 160px;
+  overflow: none;
+}
+
+.tdropdown-content a {
+  color: blue;
+  padding: 2px 0px;
+  display: inline;
+}
+
+.tshow {display: block;}
+
+    </style>
+</head>
+
+
+
+<body>
+    <center>
+        <h2>-= Title2 =-</h2>
+    </center>
+    <table align="center">
+        <tr>
+            <td style="width:700px;padding:10px;" align="center">
+<ul><a href="#" style="color:blue">Content</a>
+  <button id="aa1" class="tdropbtn" onclick="Tgl(this.id)" style="display:inline;">[+]</button>
+  <button id="paa1" class="tdropbtn" onclick="Tgl(this.id)" style="display:none;">[-]</button>
+
+  <div id="lvlaa1" class="tdropdown-content">
+    <li><a href="#home">1. Home</a></li>
+    <li><a href="#about">2. About</a></li>
+    <li><a href="#contact">3. Contact</a>
+      <button id="aa2" class="tdropbtn" onclick="Tgl(this.id)" style="display:inline;">[+]</button>
+      <button id="paa2" class="tdropbtn" onclick="Tgl(this.id)" style="display:none;">[-]</button></li>
+
+    <div id="lvlaa2" class="tdropdown-content">
+      <li><a href="#home">3.1 Home</a></li>
+      <li><a href="#about">3.2 About</a></li>
+      <li><a href="#contact">3.3 Contact</a>
+        <button id="aa3" class="tdropbtn" onclick="Tgl(this.id)" style="display:inline;">[+]</button>
+        <button id="paa3" class="tdropbtn" onclick="Tgl(this.id)" style="display:none;">[-]</button></li>
+
+      <div id="lvlaa3" class="tdropdown-content">
+        <li><a href="#home">3.1 Home</a></li>
+        <li><a href="#about">3.2 About</a></li>
+        <li><a href="#contact">3.3 Contact</a></li>
+      </div>
+
+    </div>
+  </div>
+</ul>
+<ul><a href="#" style="color:blue">Content</a>
+  <button id="ab1" class="tdropbtn" onclick="Tgl(this.id)" style="display:inline;">[+]</button>
+  <button id="pab1" class="tdropbtn" onclick="Tgl(this.id)" style="display:none;">[-]</button>
+
+  <div id="lvlab1" class="tdropdown-content">
+    <li><a href="#home">1. Home</a></li>
+    <li><a href="#about">2. About</a></li>
+    <li><a href="#contact">3. Contact</a>
+      <button id="ab2" class="tdropbtn" onclick="Tgl(this.id)" style="display:inline;">[+]</button>
+      <button id="pab2" class="tdropbtn" onclick="Tgl(this.id)" style="display:none;">[-]</button></li>
+
+    <div id="lvlab2" class="tdropdown-content">
+      <li><a href="#home">3.1 Home</a></li>
+      <li><a href="#about">3.2 About</a></li>
+      <li><a href="#contact">3.3 Contact</a></li>
+  </div>
+
+
+
+
+
+
+
+            </td>
+        </tr>
+    </table>
+
+
+
+
+</body>
+
+<script>
+  function Tgl(click_id) {
+    var x = document.getElementById(click_id);
+    var z = click_id.match(/\d+/)[0];
+    var y = click_id.slice(-3);
+    var w = document.getElementById(y);
+    var t = document.getElementById(`p${y}`);
+
+    /* If [+] is visible, make it invisible and display [-] - and vice versa*/
+    if (click_id.indexOf('p') >= 0) {
+      if (x.style.display === "none") {
+        x.style.display = "inline";
+        w.style.display = "none";
+      }
+      if (x.style.display === "inline") {
+        x.style.display = "none";
+        w.style.display = "inline";
+      }
+    } else {
+      if (x.style.display === "none") {
+        x.style.display = "inline";
+        t.style.display = "none";
+      }
+      if (x.style.display === "inline") {
+        x.style.display = "none";
+        t.style.display = "inline";
+      }
+    }
+    /*Toggle dropdown display onclick*/
+    document.getElementById(`lvl${y}`).classList.toggle("tshow");
+    /*Increment list spacing with each nest*/
+    var p = document.getElementById(`lvl${y}`);
+    p.style.left = (9 * z) + 'px';
+}
+
+</script>
+
+
+</html>
