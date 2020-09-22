@@ -41,11 +41,12 @@
             vertical-align: baseline;
             position: relative;
          }        
+         /* -- mobile -- */
          .ol-box{ 
             LINE-HEIGHT:1.2em;
             border:1px solid black;
          }
-         
+         /* -- mobile -- */
          @media (max-width: 1450px)  {
             html { font-size: 190%;   }
             .ol-box {line-height: 1.2em;}
@@ -56,6 +57,10 @@
                top:25px
             }
          }
+         /* -- fullscreen -- */
+         :-webkit-full-screen {
+         background:  #F0F0F0;
+        }
 
       </style>
    </head>
@@ -82,47 +87,11 @@
                </div>
  
 <br/> 
-<!------------------------------------------------------ test -------------------------------------------------------------->
+<!-------------------------------------------------------------------------------------------------------------------->
 <br/>
 
 
 
-<img  id="divID" data-src="https://static.tutsplus.com/assets/translations/native-logo-26829f74cf5fa5fd085cd64c24df4c50.png" alt="Native" title="Native" class="free-trial-highlight__logo loaded" src="https://static.tutsplus.com/assets/translations/native-logo-26829f74cf5fa5fd085cd64c24df4c50.png" data-was-processed="true">
-<button onclick="fun_name()">Full screen</button>
-<br>
-
-asdas
-
-
-<script>
-  function fun_name()
-  {
-    var targetelement = document.getElementById("divID");
-  
-    if (targetelement.requestFullscreen)
-    {
-      targetelement.requestFullscreen();
-    }
-    if (targetelement.webkitRequestFullscreen)
-    {
-      targetelement.webkitRequestFullscreen();
-    }
-    if (targetelement.mozRequestFullScreen)
-    {
-      targetelement.mozRequestFullScreen();
-    }
-    if (targetelement.msRequestFullscreen)
-    {
-      targetelement.msRequestFullscreen();
-    }
-  }
-</script>
-
-</div>
- 
-<br/> 
-<!-------------------------------------------------- test ------------------------------------------------------------------>
-<br/>
 
 
 
@@ -778,13 +747,24 @@ mountain
 
 
 
-<img src="img\China_administrative_claimed_included.svg" alt="Italian Trulli" >
+<img  id="provinceID" onclick="fun_name(this.id)" src="img\China_administrative_claimed_included.svg" alt="Italian Trulli" >
 
 
-<img src="img\China_rivers.svg" alt="Italian Trulli" >
+<img id="riverID" onclick="fun_name(this.id)"  src="img\China_rivers.svg" alt="Italian Trulli" >
 
-   
-
+<script>
+   function fun_name(clicked_id)
+   {
+     var el = document.getElementById(clicked_id);
+       rfs = el.requestFullscreen
+         || el.webkitRequestFullScreen
+         || el.mozRequestFullScreen
+         || el.msRequestFullscreen 
+     ;
+     rfs.call(el);
+     // consider exit also
+   }
+ </script>
 
 
 
