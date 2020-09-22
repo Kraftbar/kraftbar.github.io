@@ -36,7 +36,7 @@ class canvasplot{
         Ctx.clearRect(0,0,this.Width,this.Height) ;
 
 //        this.RenderFunction(F,Ctx);
-        this.RenderArr(arr,Ctx);
+        this.RenderY(arr,Ctx);
         this.DrawAxes(Ctx) ;
     }
 
@@ -137,8 +137,31 @@ class canvasplot{
     
     
     
-    // set XmaX and YmaX
-    RenderArr(arr_y,Ctx) {
+    RenderY(arr_y,Ctx) {
+        this.MinX=-5    ;
+        this.MaxX= arr_y.length+5;
+        this.MaxY=Math.max(...arr_y)*1.1;
+        var first = true;
+        Ctx.beginPath();
+        var MinX=0;
+        var MaxX=arr_y.length-1; 
+        var XSTEP=1;
+        for (var x = MinX; x <= MaxX; x += XSTEP) {
+            var y = arr_y[x] ;
+            console.log(x +"  " +y);
+            if (first) {
+                Ctx.moveTo(this.XC(x),this.YC(y)) ;
+                first = false ;
+            } else {
+                Ctx.lineTo(this.XC(x),this.YC(y)) ;
+            }
+        }
+        Ctx.stroke() ;
+    }
+
+
+    // unfinished
+    RenderXY(arr_x,arr_y,Ctx) {
         this.MinX=-5    ;
         this.MaxX= arr_y.length+5;
         this.MaxY=Math.max(...arr_y)*1.1;
