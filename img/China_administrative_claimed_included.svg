@@ -370,22 +370,22 @@ text.tsar {font-size:9px;font-style:normal;font-weight:normal;writing-mode:lr-tb
    id="tspan127a">(Shǎnxī)</tspan><tspan
    x="411.50919"
    y="245.07669"
-   id="tspan129">Shānxī</tspan><tspan
+   id="tspan129" fill="deeppink">Shānxī</tspan><tspan
    x="450.18365"
    y="214.80542"
-   id="tspan131">Héběi</tspan><tspan
+   id="tspan131" fill="mediumpurple">Héběi</tspan><tspan
    x="301.49683"
    y="339.28644"
    id="tspan133">Sìchuān</tspan><tspan
    x="415.86755"
    y="325.7301"
-   id="tspan135">Húběi</tspan><tspan
+   id="tspan135"  fill="mediumpurple">Húběi</tspan><tspan
    x="426.2066"
    y="290.77762"
-   id="tspan137">Hénán</tspan><tspan
+   id="tspan137" fill="mediumpurple">Hénán</tspan><tspan
    x="476.77728"
    y="259.88611"
-   id="tspan139">Shāndōng</tspan><tspan
+   id="tspan139" fill="deeppink">Shāndōng</tspan><tspan
    x="478.00562"
    y="323.76917"
    id="tspan141">Ānhuī</tspan><tspan
@@ -400,7 +400,7 @@ text.tsar {font-size:9px;font-style:normal;font-weight:normal;writing-mode:lr-tb
    id="tspan147">Guìzhōu</tspan><tspan
    x="410.90466"
    y="380.40631"
-   id="tspan149">Húnán</tspan><tspan
+   id="tspan149" fill="mediumpurple">Húnán</tspan><tspan
    x="458.69559"
    y="379.32022"
    id="tspan151">Jiāngxī</tspan><tspan
@@ -412,7 +412,7 @@ text.tsar {font-size:9px;font-style:normal;font-weight:normal;writing-mode:lr-tb
    id="tspan155">Hǎinán</tspan><tspan
    x="445.17203"
    y="426.73938"
-   id="tspan157">Guǎngdōng</tspan><tspan
+   id="tspan157" fill="deeppink">Guǎngdōng</tspan><tspan
    x="488.68408"
    y="396.44144"
    id="tspan159">Fújiàn</tspan><tspan
@@ -421,7 +421,7 @@ text.tsar {font-size:9px;font-style:normal;font-weight:normal;writing-mode:lr-tb
    id="tspan161">Táiwān</tspan><tspan
    x="378.10516"
    y="426.35901"
-   id="tspan163">Guǎngxī</tspan><tspan
+   id="tspan163" fill="deeppink">Guǎngxī</tspan><tspan
    x="121.29623"
    y="294.3013"
    id="tspan165">Tibet (Xīzàng)</tspan><tspan
