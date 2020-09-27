@@ -47,6 +47,14 @@
             vertical-align: baseline;
             position: relative;
          }        
+         @media (max-width: 1450px){
+            .sidenote
+            {
+               margin-right: initial;
+               width: 30%;
+               top:25px
+            }
+         }
          /* -- fullscreen -- */
          :-webkit-full-screen {
          background:  #F0F0F0;
@@ -66,15 +74,9 @@
          width: 40%;
          }
          /* -- mobile -- */
-         @media (pointer:none), (pointer:coarse)   {
+         @media (pointer:none), (pointer:coarse) {
             html { font-size: 190%;   }
             .ol-box {line-height: 1.2em;}
-            .sidenote
-            {
-               margin-right: initial;
-               width: 30%;
-               top:25px
-            }
             .calc{
             width: 95%;
             margin-left: 5%; 
