@@ -14,6 +14,7 @@
       <link rel="icon" href="favicon3.ico" type="image/x-icon" />
       <title> lang-notes </title>
       <style>
+         /* -- orange box -- */
          div {
             background-color:#FFEEDD;
             border: 1px solid #FF8855;
@@ -24,10 +25,15 @@
             -webkit-border-radius: 10px;
             border-radius: 40px;
          }
-
+         /* -- table size -- */
          table.center {
          margin-left: auto;
          margin-right: auto;
+         }
+         /* -- text boxes -- */
+         .ol-box{ 
+            LINE-HEIGHT:1.2em;
+            border:1px solid black;
          }
          .sidenote {
             float: right;
@@ -41,10 +47,23 @@
             vertical-align: baseline;
             position: relative;
          }        
-         /* -- text boxes -- */
-         .ol-box{ 
-            LINE-HEIGHT:1.2em;
-            border:1px solid black;
+         /* -- fullscreen -- */
+         :-webkit-full-screen {
+         background:  #F0F0F0;
+        }
+         /* -- table size -- */
+         .calc{
+            width: 70%;
+            margin-left: 15%; 
+         }
+         .calc td:nth-child(1) {
+         width: 20%;
+         }
+         .calc td:nth-child(2) {
+         width: 30%;
+         }
+         .calc td:nth-child(3) {
+         width: 40%;
          }
          /* -- mobile -- */
          @media (max-width: 1450px)  {
@@ -57,25 +76,7 @@
                top:25px
             }
          }
-         /* -- fullscreen -- */
-         :-webkit-full-screen {
-         background:  #F0F0F0;
-        }
-         /* -- table -- */
-         .calc{
-            width: 70%;
-            margin-left: 15%; 
-         }
 
-         .calc td:nth-child(1) {
-         width: 20%;
-         }
-         .calc td:nth-child(2) {
-         width: 30%;
-         }
-         .calc td:nth-child(3) {
-         width: 40%;
-         }
       </style>
    </head>
    <body>
