@@ -350,7 +350,7 @@ function getCookie(cname) {
 function checkCookie() {
   var user=getCookie("username");
   if (user != "") {
-    document.write("user: " + user);
+    document.getElementById("dispcookie").innerHTML = user;
   } else {
      user = prompt("Please enter your name:","");
      if (user != "" && user != null) {
