@@ -1,5 +1,4 @@
 // TODO
-//   - lower / capital
 //   - bug: flashcard and text2speech
 //   - refactooooooor!!
 
@@ -254,6 +253,26 @@ function changeLangFunction() {
     standardLang_flag=!standardLang_flag;
 
 }
+
+
+// -----------------------
+// Automode 
+// -----------------------
+function autoforward() {
+  nextFlashcard();
+}
+
+auto_flag=0;
+function automode() {
+  if(auto_flag){
+    clearTimeout(myVar);
+  }else{
+    var myVar = setInterval(autoforward, 2000);
+
+  }
+  
+  }
+
 
 
 // -----------------------
