@@ -134,7 +134,7 @@ function nextItem() {
     var inputF = document.getElementById("typed_word"); 
     inputF.value = ""; 
 
-    return  words[k][0]+" "+words[k][1];
+    document.getElementById('output').textContent =   words[k][0]+" "+words[k][1];
 }
 function prevItem() {
     document.getElementById('feedback').innerHTML="<br/>";
@@ -148,7 +148,7 @@ function prevItem() {
     var inputF = document.getElementById("typed_word"); 
     inputF.value = ""; 
 
-    return words[k][0]+" "+words[k][1]; // give us back the item of where we are now
+    document.getElementById('output').textContent =  words[k][0]+" "+words[k][1]; // give us back the item of where we are now
 }
 function checkItem() {
 
@@ -163,9 +163,15 @@ function checkItem() {
     }
       correct_flag=0;
   
-    return  feedback.concat(" ☓");
+      document.getElementById('feedback').textContent=  feedback.concat(" ☓");
 }
 
+
+
+
+// -----------------------
+// User input 
+// -----------------------
 
 // button input
 window.addEventListener('load', function () {
@@ -173,20 +179,20 @@ window.addEventListener('load', function () {
     document.getElementById('prev_button').addEventListener(
         'click', // we want to listen for a click
         function (e) { // the e here is the event itself
-            document.getElementById('output').textContent = prevItem();
+             prevItem();
         }
     );
     
     document.getElementById('next_button').addEventListener(
         'click', // we want to listen for a click
         function (e) { // the e here is the event itself
-            document.getElementById('output').textContent = nextItem();
+            nextItem();
         }
     );
     document.getElementById('check_button').addEventListener(
         'click', // we want to listen for a click
         function (e) { // the e here is the event itself
-            document.getElementById('feedback').textContent=checkItem();
+            checkItem();
         }
     );
 
@@ -201,10 +207,10 @@ var typed_word = document.getElementById("typed_word");
 typed_word.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
     event.preventDefault();
-    document.getElementById('feedback').textContent=checkItem();
+    checkItem();
     console.log(correct_flag);
     if(correct_flag>1){
-      document.getElementById('output').textContent = nextItem();
+       nextItem();
     }
 
     }
@@ -260,18 +266,30 @@ function changeLangFunction() {
 // -----------------------
 function autoforward() {
   nextFlashcard();
-}
 
+}
+myVar=null
 auto_flag=0;
 function automode() {
   if(auto_flag){
-    clearTimeout(myVar);
+    clearInterval(myVar);
   }else{
-    var myVar = setInterval(autoforward, 2000);
-
+     myVar = setInterval(autoforward, 2000);
+    document.addEventListener("keydown", nextAuto, false);
   }
   
+}
+
+function nextAuto(e) {
+var keyCode = e.keyCode;
+  if(keyCode==13) {
+    clearInterval(myVar);
+     myVar = setInterval(autoforward, 2000);
+    nextItem();
+  } else {
+    nextFlashcard();
   }
+}
 
 
 
