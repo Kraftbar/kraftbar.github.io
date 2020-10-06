@@ -134,6 +134,7 @@ function nextItem() {
     var inputF = document.getElementById("typed_word"); 
     inputF.value = ""; 
 
+    falshcard_toggle=0;
     document.getElementById('output').textContent =   words[k][0]+" "+words[k][1];
 }
 function prevItem() {
@@ -148,6 +149,7 @@ function prevItem() {
     var inputF = document.getElementById("typed_word"); 
     inputF.value = ""; 
 
+    falshcard_toggle=0;
     document.getElementById('output').textContent =  words[k][0]+" "+words[k][1]; // give us back the item of where we are now
 }
 function checkItem() {
