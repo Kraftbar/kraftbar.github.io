@@ -42,18 +42,21 @@
 </head>
 
 <body >
+  <p id="demo" >Click me.</p>
 
 
 <div id="container">
   <div class="empty">
-    <div class="fill" draggable="true">sdfsdfsd</div>
+    <div class="fill" id="zh"  onclick="onClickLang(this.id)" draggable="true">zh</div>
   </div>
 
   <div class="empty">
-    <div class="fill"  draggable="true">asdasdasd </div>
+    <div class="fill" id="pinyin"  onclick="onClickLang(this.id)" draggable="true">pinyin</div>
+  </div>
+  <div class="empty">
+    <div class="fill" id="eng"  onclick="onClickLang(this.id)" draggable="true">eng</div>
   </div>
 
-<div class="empty"></div>
 <div class="empty"></div>
 <div class="empty"></div>
 </div>
@@ -121,5 +124,22 @@ const empties = document.querySelectorAll('.empty');
           shuffleParentElement.append(shuffleWithElement);
         }
     }
+
+
+
+
+
+function onClickLang(el) {
+temp=document.getElementById(el).innerHTML   ;
+if   (temp== "x"){
+  document.getElementById(el).innerHTML=el
+}else{
+  document.getElementById(el).innerHTML = "x";  
+}
+
+console.log(typeof el);
+}
+
+
 </script>
 </html>

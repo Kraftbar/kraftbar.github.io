@@ -299,6 +299,15 @@ var keyCode = e.keyCode;
 
 
 // -----------------------
+// change lang 
+// -----------------------
+
+
+
+
+
+
+// -----------------------
 // focus mode 
 // todo: refactor, looks ugly now
 // -----------------------
