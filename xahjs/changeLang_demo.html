@@ -128,9 +128,9 @@ const empties = document.querySelectorAll('.empty');
 
 
 function onClickLang(el) {
-temp=document.getElementById(el).firstElementChild   ;
-if   (temp.innerHTML== "x"){
-  document.getElementById(el).firstElementChild.innerHTML=temp.id;
+temp_child=document.getElementById(el).firstElementChild   ;
+if   (temp_child.innerHTML== "x"){
+  document.getElementById(el).firstElementChild.innerHTML=temp_child.id;
 }else{
   document.getElementById(el).firstElementChild.innerHTML = "x";  
 }
