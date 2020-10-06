@@ -279,6 +279,7 @@ function automode() {
      myVar = setInterval(autoforward, 2000);
     document.addEventListener("keydown", nextAuto, false);
   }
+  auto_flag=!auto_flag; 
   
 }
 
