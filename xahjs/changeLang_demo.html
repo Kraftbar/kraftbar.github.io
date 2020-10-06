@@ -10,10 +10,8 @@
 
 
 .fill {
- height: 130px;
- width: 130px;
- top: 5px;
- left: 5px;
+ height: 30px;
+ width: 30px;
  overflow: hidden; 
 
  cursor: pointer;
@@ -25,12 +23,11 @@
 
 .empty {
  display: inline-block;
- height: 160px;
- width: 160px;
+ height: 30px;
+ width: 30px;
  overflow: hidden;
 
- margin: 10px;
- border: solid 3px salmon;
+   border: solid 3px gray;
  background: white;
 }
 
@@ -47,18 +44,16 @@
 
 <div id="container">
   <div class="empty">
-    <div class="fill" id="zh"  onclick="onClickLang(this.id)" draggable="true">zh</div>
+    <div class="fill" id="zh"   draggable="true">zh</div>
   </div>
 
-  <div class="empty">
-    <div class="fill" id="pinyin"  onclick="onClickLang(this.id)" draggable="true">pinyin</div>
+  <div class="empty" id="middle" onclick="onClickLang(this.id)">
+    <div class="fill" id="pinyin"   draggable="true">pinyin</div>
   </div>
   <div class="empty">
-    <div class="fill" id="eng"  onclick="onClickLang(this.id)" draggable="true">eng</div>
+    <div class="fill" id="eng"   draggable="true">eng</div>
   </div>
 
-<div class="empty"></div>
-<div class="empty"></div>
 </div>
 
 
@@ -125,16 +120,19 @@ const empties = document.querySelectorAll('.empty');
         }
     }
 
-
+// 
+// if the changes
+// 
+// 
 
 
 
 function onClickLang(el) {
-temp=document.getElementById(el).innerHTML   ;
-if   (temp== "x"){
-  document.getElementById(el).innerHTML=el
+temp=document.getElementById(el).firstElementChild   ;
+if   (temp.innerHTML== "x"){
+  document.getElementById(el).firstElementChild.innerHTML=temp.id;
 }else{
-  document.getElementById(el).innerHTML = "x";  
+  document.getElementById(el).firstElementChild.innerHTML = "x";  
 }
 
 console.log(typeof el);
