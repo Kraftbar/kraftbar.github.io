@@ -2,7 +2,7 @@
 //   - bug: flashcard and text2speech
 //   - refactooooooor!!
 //   - arrows, and maybe memmory for random
-//   - Bug: automode is bugged, cant stop it 
+//   - messy global hotkeys when in automode
 
 
 var c = document.getElementById("myCanvas");
@@ -12,7 +12,6 @@ ctx.fillText("Hello World", 10, 50);
 
 
 // globals 
-
 var words = new Array(1000);
 var words_buffer = new Array(1000);
 var words_pinyin_woAccents = new Array(1000);
@@ -20,15 +19,14 @@ var words_empt=words;
 var words_length=0;
 correct_flag=0;
 standardLang_flag=1;
-
 falshcard_toggle=0;
+
+
+
 
 // -----------------------
 // file/ txts handeling 
 // -----------------------
-
-
-
 
 function pros(csv){
     //reset
@@ -231,38 +229,32 @@ function text2speech(){
 window.speechSynthesis.speak(msg);
 }
 
-function changeLangFunction() {
-
-    words=words_empt;
-
+function changeLangFunction(pos1,pos2) {
+    console.log(pos1);
+    console.log(pos2    );
+//    words=words_empt;
     for (var i = 0; i < words_length; i++) {
-        if(standardLang_flag){
-        words_buffer[i]=words[i][1];
-        words[i][1]="";
-
-        }else{
-
-        words[i][1]=words_buffer[i];
-        }
-        [words[i][0], words[i][2]] = [words[i][2], words[i][0]];
-
+        [words[i][pos1], words[i][pos2]] = [words[i][pos2], words[i][pos1]];
     }
 
-
-    // hide speech
-    var speechDiv = document.getElementById("text2speech");
-    if (speechDiv.style.display === "none") {
-      speechDiv.style.display = "block";
-    } else {
-      speechDiv.style.display = "none";
-    }
-
-
-
-    // toggle boolean
-    standardLang_flag=!standardLang_flag;
+    // consider hide functionality
 
 }
+
+
+function hideMiddle() {
+    for (var i = 0; i < words_length; i++) {
+        if(standardLang_flag){
+            words_buffer[i]=words[i][1];
+            words[i][1]="";
+
+        }else{
+            words[i][1]=words_buffer[i];
+        }
+    }
+    standardLang_flag=!standardLang_flag;
+}
+
 
 
 // -----------------------
@@ -298,12 +290,79 @@ var keyCode = e.keyCode;
 
 
 
-// -----------------------
+// -----------------------  
 // change lang 
 // -----------------------
 
+// 1. update array every event
+// 2. update x with real val
+// - trigger hideMiddle whenever a x is moved
 
 
+const fills = document.querySelectorAll('.fill');
+const empties = document.querySelectorAll('.empty');
+
+ let shuffleElement;
+ let shuffleParentElement;
+ let hopFrom;
+ let hopTo;
+// -----------------Drag Functions
+// Fill listeners
+for (const fill of fills) {
+    fill.addEventListener('dragstart', dragStart);
+    fill.addEventListener('dragend', dragEnd);
+}
+// Loop through empty boxes and add listeners
+for (const empty of empties) {
+    empty.addEventListener('dragover', dragOver);
+    empty.addEventListener('dragenter', dragEnter);
+    empty.addEventListener('dragleave', dragLeave);
+    empty.addEventListener('drop', dragDrop);
+}
+
+function dragStart(e) {
+    this.className += ' hold';
+    setTimeout(() => (this.className = 'invisible'), 0);
+    shuffleElement = e.currentTarget;
+    shuffleParentElement = e.currentTarget.parentElement;
+    // added 
+    hopFrom=shuffleParentElement.id;
+    if(shuffleParentElement.id== "1" && shuffleElement.innerHTML=="x" ){
+            shuffleElement.innerHTML=shuffleElement.id;
+            hideMiddle();
+    }   
+}
+function dragEnd()    { this.className = 'fill';   hopTo=this.parentElement.id; switchlang();  }
+function dragOver(e)  { e.preventDefault();     }
+function dragEnter(e) { e.preventDefault();  this.className += ' hovered';    }
+function dragLeave()  { this.className = 'empty';    }
+ function dragDrop() {
+    this.className = 'empty';
+    const shuffleWithElement = this.querySelector('.fill');
+    this.innerHTML = '';
+    this.append(shuffleElement);
+    if(shuffleWithElement) {    
+      shuffleParentElement.innerHTML = '';
+      shuffleParentElement.append(shuffleWithElement);
+    }
+}
+
+// ----------------- own helpers
+function onClickLang(el) {
+    temp_child=document.getElementById(el).firstElementChild;
+    if   (temp_child.innerHTML== "x"){
+      document.getElementById(el).firstElementChild.innerHTML=temp_child.id;
+    }else{
+      document.getElementById(el).firstElementChild.innerHTML = "x";  
+    }
+    hideMiddle();
+}
+function switchlang(){
+    if ( hopFrom!= hopTo) {
+    changeLangFunction(hopFrom,hopTo)
+        
+    }
+}
 
 
 
@@ -314,7 +373,6 @@ var keyCode = e.keyCode;
 
 function focusFunction() {
     var hide0 = document.getElementById("myCanvas");
-
     var hide1 = document.getElementById("fileLabel");
     var hide2 = document.getElementById("myFile");
     var hide3 = document.getElementById("prosFileButton");
