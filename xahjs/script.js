@@ -29,6 +29,8 @@ falshcard_toggle=0;
 // -----------------------
 
 function pros(csv){
+    // conider more regex 
+    
     //reset
     k=0;
     words=words_empt;
