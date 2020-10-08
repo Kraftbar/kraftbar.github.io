@@ -161,11 +161,11 @@ function checkItem() {
   feedback=prossFeedback(inputVal,answers);
     if(inputVal==feedback){              
       correct_flag=correct_flag+1;
-      return feedback.concat(" ✓");
+      document.getElementById('feedback').textContent=   feedback.concat(" ✓");
     }
-      correct_flag=0;
+    correct_flag=0;
   
-      document.getElementById('feedback').textContent=  feedback.concat(" ☓");
+    document.getElementById('feedback').textContent=  feedback.concat(" ☓");
 }
 
 
