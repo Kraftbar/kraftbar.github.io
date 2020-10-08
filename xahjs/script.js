@@ -235,6 +235,7 @@ function randomize() {
   for (var i = 0; i < words_length; i++) {
     words_buffer[i]=words[i][1];
   }
+  nextItem();
 }
 
 function changeLangFunction(pos1,pos2) {
