@@ -162,10 +162,11 @@ function checkItem() {
     if(inputVal==feedback){              
       correct_flag=correct_flag+1;
       document.getElementById('feedback').textContent=   feedback.concat(" ✓");
+    }else{
+      correct_flag=0;
+    
+      document.getElementById('feedback').textContent=  feedback.concat(" ☓");
     }
-    correct_flag=0;
-  
-    document.getElementById('feedback').textContent=  feedback.concat(" ☓");
 }
 
 
