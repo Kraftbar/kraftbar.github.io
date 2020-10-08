@@ -1,7 +1,7 @@
 // TODO
 //   - bug: flashcard and text2speech
+//   - bug: in automode, right arrow does not show next always
 //   - refactooooooor!!
-//   - arrows, and maybe memmory for random
 //   - messy global hotkeys when in automode
 
 
@@ -128,11 +128,9 @@ function nextFlashcard(){
 function nextItem() {
     document.getElementById('feedback').innerHTML="<br/>";
     
-
-    
-    k = Math.floor(Math.random()*(words_length)); // k+1 
+    k = k+1; 
     k = k % (words_length); 
-
+    
     var inputF = document.getElementById("typed_word"); 
     inputF.value = ""; 
 
@@ -231,9 +229,16 @@ function text2speech(){
 window.speechSynthesis.speak(msg);
 }
 
+function randomize() {
+  words.sort(() => Math.random() - 0.5);
+  for (var i = 0; i < words_length; i++) {
+    words_buffer[i]=words[i][1];
+  }
+}
+
 function changeLangFunction(pos1,pos2) {
     console.log(pos1);
-    console.log(pos2    );
+    console.log(pos2);
 //    words=words_empt;
     for (var i = 0; i < words_length; i++) {
         [words[i][pos1], words[i][pos2]] = [words[i][pos2], words[i][pos1]];
@@ -271,6 +276,7 @@ auto_flag=0;
 function automode() {
   if(auto_flag){
     clearInterval(myVar);
+    document.removeEventListener("keydown", nextAuto, false);
   }else{
      myVar = setInterval(autoforward, 2000);
     document.addEventListener("keydown", nextAuto, false);
@@ -278,15 +284,27 @@ function automode() {
   auto_flag=!auto_flag; 
   
 }
-
+// 37 39
 function nextAuto(e) {
 var keyCode = e.keyCode;
+
   if(keyCode==13) {
     clearInterval(myVar);
      myVar = setInterval(autoforward, 2000);
     nextItem();
-  } else {
+  } 
+  if(keyCode == 191) {
     nextFlashcard();
+  }
+  // consider putting global 
+  if(keyCode == 37) {
+    nextItem();
+  }
+  if(keyCode == 39) {
+    prevItem();
+  }
+  if(keyCode == 70) {
+    focusFunction();
   }
 }
 
