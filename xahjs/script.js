@@ -484,9 +484,12 @@ function checkCookie() {
   if (user != "") {
     document.getElementById("dispcookie").innerHTML = user;
   } else {
-     user = prompt("Please enter your name:","");
+    user=""
+    while(user!="pepe"){
+     user = prompt("Please enter secret pass:","");
      if (user != "" && user != null) {
        setCookie("username", user, 30);
      }
+    }
   }
 }
