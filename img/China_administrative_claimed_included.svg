@@ -352,7 +352,7 @@ text.tsar {font-size:9px;font-style:normal;font-weight:normal;writing-mode:lr-tb
 <tspan
    x="564.77356"
    y="90.762253"
-   id="tspan119">Hēilóngjiāng</tspan><tspan
+   id="tspan119" fill="seagreen">Hēilóngjiāng</tspan><tspan
    x="524.17133"
    y="175.97998"
    id="tspan121">Liáoníng</tspan><tspan
@@ -391,7 +391,7 @@ text.tsar {font-size:9px;font-style:normal;font-weight:normal;writing-mode:lr-tb
    id="tspan141">Ānhuī</tspan><tspan
    x="501.80115"
    y="290.92709"
-   id="tspan143">Jiāngsū</tspan><tspan
+   id="tspan143" fill="seagreen">Jiāngsū</tspan><tspan
    x="279.59628"
    y="421.41159"
    id="tspan145">Yúnnán</tspan><tspan
@@ -403,10 +403,10 @@ text.tsar {font-size:9px;font-style:normal;font-weight:normal;writing-mode:lr-tb
    id="tspan149" fill="mediumpurple">Húnán</tspan><tspan
    x="458.69559"
    y="379.32022"
-   id="tspan151">Jiāngxī</tspan><tspan
+   id="tspan151" fill="seagreen">Jiāngxī</tspan><tspan
    x="510.03613"
    y="348.73026"
-   id="tspan153">Zhèjiāng</tspan><tspan
+   id="tspan153" fill="seagreen">Zhèjiāng</tspan><tspan
    x="384.22949"
    y="496.83215"
    id="tspan155">Hǎinán</tspan><tspan
@@ -427,7 +427,7 @@ text.tsar {font-size:9px;font-style:normal;font-weight:normal;writing-mode:lr-tb
    id="tspan165">Tibet (Xīzàng)</tspan><tspan
    x="127.60522"
    y="153.67323"
-   id="tspan167">Xīnjiāng</tspan><tspan
+   id="tspan167" fill="seagreen">Xīnjiāng</tspan><tspan
    x="344.20999"
    y="186.53802"
    id="tspan169">Inner Mongolia</tspan><tspan
