@@ -448,7 +448,7 @@ text.tsar {font-size:9px;font-style:normal;font-weight:normal;writing-mode:lr-tb
    id="tspan177">Tiānjīn</tspan><tspan
    x="476"
    y="198"
-   id="tspan179">Běijīng</tspan>
+   id="tspan179"  fill="mediumpurple">Běijīng</tspan>
 
 </text>
 
@@ -479,7 +479,7 @@ text.tsar {font-size:9px;font-style:normal;font-weight:normal;writing-mode:lr-tb
    id="tspan195">Hángzhōu</tspan><tspan
    x="487"
    y="300"
-   id="tspan197">Nánjīng</tspan><tspan
+   id="tspan197" fill="mediumpurple">Nánjīng</tspan><tspan
    x="460"
    y="241"
    id="tspan199">Jǐnán</tspan><tspan
