@@ -1,6 +1,5 @@
 // TODO
 //   - bug: flashcard and text2speech
-//   - bug: in automode, right arrow does not show next always
 //   - refactooooooor!!
 //   - messy global hotkeys when in automode
 
@@ -114,47 +113,37 @@ function prossFeedback(userInput, solutions){
 // -----------------------
 
 function nextFlashcard(){
-  if (falshcard_toggle){
-    document.getElementById('output').textContent=words[k][0]+" "+words[k][1];
-    document.getElementById('feedback').innerHTML="<br/>";
-  }else{
+  var feedbackvalue = document.getElementById("feedback").textContent;
+  console.log(feedbackvalue);
+  if (feedbackvalue=="" || feedbackvalue=="-"){
     document.getElementById('feedback').textContent = words[k][2];
-    k =  k+1 
-    k = k % (words_length); 
+  }else{
+    k = k+1;
+    k = k % (words_length);
+    document.getElementById('output').textContent=words[k][0]+" "+words[k][1];
+    document.getElementById('feedback').innerHTML="";
   }
-  falshcard_toggle=!falshcard_toggle;
 }
 
 function nextItem() {
-    document.getElementById('feedback').innerHTML="<br/>";
-    
+    document.getElementById('feedback').innerHTML="";
+    document.getElementById('typed_word').innerHTML="";    
     k = k+1; 
     k = k % (words_length); 
     
-    var inputF = document.getElementById("typed_word"); 
-    inputF.value = ""; 
-
-    falshcard_toggle=0;
     document.getElementById('output').textContent =   words[k][0]+" "+words[k][1];
 }
 function prevItem() {
-    document.getElementById('feedback').innerHTML="<br/>";
-
-
-    if (k === 0) { // i would become 0
-        k = words_length; // so put it at the other end of the array
-    }
-    k = k - 1; // decrease by one
+  document.getElementById('feedback').innerHTML="";
+  document.getElementById('typed_word').innerHTML="";
+    k = k - 1; 
+    if(k<0){k=0;}
     
-    var inputF = document.getElementById("typed_word"); 
-    inputF.value = ""; 
-
-    falshcard_toggle=0;
     document.getElementById('output').textContent =  words[k][0]+" "+words[k][1]; // give us back the item of where we are now
 }
 function checkItem() {
 
-  var inputVal = document.getElementById("typed_word").value.toLowerCase();;
+  var inputVal = document.getElementById("typed_word").value.toLowerCase();
   var answer=words[k][2].replace(/ *\([^)]*\) */g, ""); //   replace (*)
   var answers=answer.split(", ");
 
@@ -211,9 +200,9 @@ typed_word.addEventListener("keyup", function(event) {
   if (event.keyCode === 13) {
     event.preventDefault();
     checkItem();
-    console.log(correct_flag);
     if(correct_flag>1){
        nextItem();
+       console.log("dontgohere")
     }
 
     }
@@ -300,10 +289,10 @@ var keyCode = e.keyCode;
   }
   // consider putting global 
   if(keyCode == 37) {
-    nextItem();
-  }
-  if(keyCode == 39) {
     prevItem();
+  }
+  if(keyCode ==39 ) {
+    nextItem();
   }
   if(keyCode == 70) {
     focusFunction();
