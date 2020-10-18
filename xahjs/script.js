@@ -113,13 +113,13 @@ function prossFeedback(userInput, solutions){
 // -----------------------
 
 function nextFlashcard(){
-  var feedbackvalue = document.getElementById("feedback").textContent;
-  console.log(feedbackvalue);
-  if (feedbackvalue=="" || feedbackvalue=="-"){
-    document.getElementById('feedback').textContent = words[k][2];
-  }else{
-    nextItem();
-  }
+    var feedbackvalue = document.getElementById("feedback").textContent;
+    console.log(feedbackvalue);
+    if (feedbackvalue=="" || feedbackvalue=="-"){
+      document.getElementById('feedback').textContent = words[k][2];
+    }else{
+      nextItem();
+    }
 }
 
 function nextItem() {
@@ -134,7 +134,7 @@ function prevItem() {
     document.getElementById('typed_word').innerHTML="";
     k = k - 1; 
     if(k<0){k=0;}
-    document.getElementById('output').textContent =  words[k][0]+" "+words[k][1]; // give us back the item of where we are now
+    document.getElementById('output').textContent =  words[k][0]+" "+words[k][1]; 
 }
 function checkItem() {
 
