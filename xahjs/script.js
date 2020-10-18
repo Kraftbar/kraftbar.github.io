@@ -118,10 +118,7 @@ function nextFlashcard(){
   if (feedbackvalue=="" || feedbackvalue=="-"){
     document.getElementById('feedback').textContent = words[k][2];
   }else{
-    k = k+1;
-    k = k % (words_length);
-    document.getElementById('output').textContent=words[k][0]+" "+words[k][1];
-    document.getElementById('feedback').innerHTML="";
+    nextItem();
   }
 }
 
@@ -130,15 +127,13 @@ function nextItem() {
     document.getElementById('typed_word').innerHTML="";    
     k = k+1; 
     k = k % (words_length); 
-    
     document.getElementById('output').textContent =   words[k][0]+" "+words[k][1];
 }
 function prevItem() {
-  document.getElementById('feedback').innerHTML="";
-  document.getElementById('typed_word').innerHTML="";
+    document.getElementById('feedback').innerHTML="";
+    document.getElementById('typed_word').innerHTML="";
     k = k - 1; 
     if(k<0){k=0;}
-    
     document.getElementById('output').textContent =  words[k][0]+" "+words[k][1]; // give us back the item of where we are now
 }
 function checkItem() {
