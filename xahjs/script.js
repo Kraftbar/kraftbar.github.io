@@ -18,8 +18,6 @@ var words_empt=words;
 var words_length=0;
 correct_flag=0;
 standardLang_flag=1;
-falshcard_toggle=0;
-
 
 
 
@@ -121,17 +119,16 @@ function nextFlashcard(){
       nextItem();
     }
 }
-
 function nextItem() {
     document.getElementById('feedback').innerHTML="";
-    document.getElementById('typed_word').innerHTML="";    
+    document.getElementById('typed_word').value="";    
     k = k+1; 
     k = k % (words_length); 
     document.getElementById('output').textContent =   words[k][0]+" "+words[k][1];
 }
 function prevItem() {
     document.getElementById('feedback').innerHTML="";
-    document.getElementById('typed_word').innerHTML="";
+    document.getElementById('typed_word').value="";
     k = k - 1; 
     if(k<0){k=0;}
     document.getElementById('output').textContent =  words[k][0]+" "+words[k][1]; 
@@ -141,7 +138,6 @@ function checkItem() {
   var inputVal = document.getElementById("typed_word").value.toLowerCase();
   var answer=words[k][2].replace(/ *\([^)]*\) */g, ""); //   replace (*)
   var answers=answer.split(", ");
-
   feedback=prossFeedback(inputVal,answers);
     if(inputVal==feedback){              
       correct_flag=correct_flag+1;
@@ -188,23 +184,50 @@ window.addEventListener('load', function () {
 });
 
 
-// enter input
+
+
+// -----------------------
+// hotkeys. 
+// -----------------------
 var typed_word = document.getElementById("typed_word");
 
-typed_word.addEventListener("keyup", function(event) {
-  if (event.keyCode === 13) {
-    event.preventDefault();
+typed_word.addEventListener("keydown", function(e) {
+  if (e.key === 'Enter') {
+    e.preventDefault();
     checkItem();
     if(correct_flag>1){
        nextItem();
-       console.log("dontgohere")
     }
 
     }
     
 });
+document.addEventListener("keydown", nextAuto, false);
+document.removeEventListener("keydown", nextAuto, false);
 
 
+function nextAuto(e) {
+  var keyCode = e.keyCode;
+    if(keyCode==13) {
+      //clearInterval(myVar);
+      //myVar = setInterval(autoforward, 2000);
+      nextItem();
+    } 
+    if(keyCode == 191) {
+      nextFlashcard();
+    }
+    // consider putting global 
+    if(keyCode == 37) {
+      prevItem();
+    }
+    if(keyCode ==39 ) {
+      nextItem();
+    }
+    if(keyCode == 70) {
+      focusFunction();
+    }
+  }
+  
 
 // -----------------------
 // Misc. 
@@ -262,36 +285,11 @@ auto_flag=0;
 function automode() {
   if(auto_flag){
     clearInterval(myVar);
-    document.removeEventListener("keydown", nextAuto, false);
   }else{
      myVar = setInterval(autoforward, 2000);
-    document.addEventListener("keydown", nextAuto, false);
   }
   auto_flag=!auto_flag; 
   
-}
-// 37 39
-function nextAuto(e) {
-var keyCode = e.keyCode;
-
-  if(keyCode==13) {
-    clearInterval(myVar);
-     myVar = setInterval(autoforward, 2000);
-    nextItem();
-  } 
-  if(keyCode == 191) {
-    nextFlashcard();
-  }
-  // consider putting global 
-  if(keyCode == 37) {
-    prevItem();
-  }
-  if(keyCode ==39 ) {
-    nextItem();
-  }
-  if(keyCode == 70) {
-    focusFunction();
-  }
 }
 
 
