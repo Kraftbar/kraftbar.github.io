@@ -193,18 +193,18 @@ window.addEventListener('load', function () {
 var typed_word = document.getElementById("typed_word");
 
 
-
+document.removeEventListener("keydown", globalhotkeys, false);  
 
 typed_word.addEventListener('focus', function() {
-  document.removeEventListener("keydown", globalhotkeys, false);  
-  document.addEventListener("keydown",    enterToCheck, false);
+  document.removeEventListener("keydown", global_hotkeys, false);  
+  document.addEventListener("keydown",    inputfield_hotkeys, false);
 });
 typed_word.addEventListener('focusout', function() {
-  document.addEventListener("keydown",    globalhotkeys, false);
-  document.removeEventListener("keydown", enterToCheck, false);  
+  document.addEventListener("keydown",    global_hotkeys, false);
+  document.removeEventListener("keydown", inputfield_hotkeys, false);  
 });
 
-function enterToCheck(e) {
+function inputfield_hotkeys(e) {
   if (e.key === 'Enter') {
     e.preventDefault();
     checkItem();
@@ -214,7 +214,7 @@ function enterToCheck(e) {
     }
 }
 
-function globalhotkeys(e) {
+function global_hotkeys(e) {
   var keyCode = e.keyCode;
     if(keyCode==13) {
       //clearInterval(myVar);
