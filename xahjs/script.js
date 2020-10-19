@@ -369,49 +369,17 @@ function focusFunction() {
     var hide4 = document.getElementById("prosLabel");
     var hide5 = document.getElementById("prosButton");
     var hide6 = document.getElementById("myTextarea");
-    if (hide0.style.display == "none") {
-        hide0.style.display = "block";
-      } else {
-        hide0.style.display = "none";
-      }
-  
-    if (hide1.style.display == "none") {
-      hide1.style.display = "block";
-    } else {
-      hide1.style.display = "none";
-    }
-    
-    if (hide2.style.display == "none") {
-        hide2.style.display = "block";
-      } else {
-        hide2.style.display = "none";
-      }
-      
-      if (hide3.style.display == "none") {
-        hide3.style.display = "block";
-      } else {
-        hide3.style.display = "none";
-      }
-      if (hide4.style.display == "none") {
-        hide4.style.display = "block";
-      } else {
-        hide4.style.display = "none";
-      }
-      if (hide5.style.display == "none") {
-        hide5.style.display = "block";
-      } else {
-        hide5.style.display = "none";
-      }
-      if (hide6.style.display == "none") {
-        hide6.style.display = "block";
-      } else {
-        hide6.style.display = "none";
-      }
-
-      var div1 = document.getElementById ("input_output");
-      var div2 = document.getElementById ("buttons");
-      div1.style.textAlign = "center";
-      div2.style.textAlign = "center";
+    hide0.style.display = hide0.style.display === 'none' ? '' : 'none';
+    hide1.style.display = hide1.style.display === 'none' ? '' : 'none';
+    hide2.style.display = hide2.style.display === 'none' ? '' : 'none';
+    hide3.style.display = hide3.style.display === 'none' ? '' : 'none';
+    hide4.style.display = hide4.style.display === 'none' ? '' : 'none';
+    hide5.style.display = hide5.style.display === 'none' ? '' : 'none';
+    hide6.style.display = hide6.style.display === 'none' ? '' : 'none';
+    var div1 = document.getElementById ("input_output");
+    var div2 = document.getElementById ("buttons");
+    div1.style.textAlign = "center";
+    div2.style.textAlign = "center";
 
   }
 
