@@ -1,7 +1,8 @@
 // TODO
 //   - bug: flashcard and text2speech
 //   - refactooooooor!!
-//   - messy global hotkeys when in automode
+//   - consider reset in automode
+//   - colour in  based on correct_flag
 
 
 var c = document.getElementById("myCanvas");
@@ -136,7 +137,7 @@ function prevItem() {
 function checkItem() {
 
   var inputVal = document.getElementById("typed_word").value.toLowerCase();
-  var answer=words[k][2].replace(/ *\([^)]*\) */g, ""); //   replace (*)
+  var answer=words[k][2].replace(/^ *| *\([^)]*\) */g, ""); //   replace brackets and whitespace 
   var answers=answer.split(", ");
   feedback=prossFeedback(inputVal,answers);
     if(inputVal==feedback){              
