@@ -3,7 +3,7 @@
 //   - refactooooooor!!
 //   - consider reset in automode
 //   - colour in  based on correct_flag
-//   - flashcard button a littl buggy
+//   - reset languages when new   read
 
 
 var c = document.getElementById("myCanvas");
@@ -115,7 +115,7 @@ function prossFeedback(userInput, solutions){
 function nextFlashcard(){
     var feedbackvalue = document.getElementById("feedback").textContent;
     console.log(feedbackvalue);
-    if (feedbackvalue=="" || feedbackvalue=="-"){
+    if (feedbackvalue=="" || feedbackvalue=="-" || feedbackvalue.includes("☓")){
       document.getElementById('feedback').textContent = words[k][2];
     }else{
       nextItem();
