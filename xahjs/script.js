@@ -202,9 +202,13 @@ typed_word.addEventListener("keydown", function(e) {
     }
     
 });
-document.addEventListener("keydown", nextAuto, false);
-document.removeEventListener("keydown", nextAuto, false);
 
+typed_word.addEventListener('focus', function() {
+  document.removeEventListener("keydown", nextAuto, false);  
+});
+typed_word.addEventListener('focusout', function() {
+  document.addEventListener("keydown", nextAuto, false);
+});
 
 function nextAuto(e) {
   var keyCode = e.keyCode;
@@ -216,7 +220,6 @@ function nextAuto(e) {
     if(keyCode == 191) {
       nextFlashcard();
     }
-    // consider putting global 
     if(keyCode == 37) {
       prevItem();
     }
@@ -228,6 +231,9 @@ function nextAuto(e) {
     }
   }
   
+
+
+
 
 // -----------------------
 // Misc. 
