@@ -191,26 +191,29 @@ window.addEventListener('load', function () {
 // -----------------------
 var typed_word = document.getElementById("typed_word");
 
-typed_word.addEventListener("keydown", function(e) {
+
+
+
+typed_word.addEventListener('focus', function() {
+  document.removeEventListener("keydown", globalhotkeys, false);  
+  document.addEventListener("keydown",    enterToCheck, false);
+});
+typed_word.addEventListener('focusout', function() {
+  document.addEventListener("keydown",    globalhotkeys, false);
+  document.removeEventListener("keydown", enterToCheck, false);  
+});
+
+function enterToCheck(e) {
   if (e.key === 'Enter') {
     e.preventDefault();
     checkItem();
     if(correct_flag>1){
        nextItem();
     }
-
     }
-    
-});
+}
 
-typed_word.addEventListener('focus', function() {
-  document.removeEventListener("keydown", nextAuto, false);  
-});
-typed_word.addEventListener('focusout', function() {
-  document.addEventListener("keydown", nextAuto, false);
-});
-
-function nextAuto(e) {
+function globalhotkeys(e) {
   var keyCode = e.keyCode;
     if(keyCode==13) {
       //clearInterval(myVar);
