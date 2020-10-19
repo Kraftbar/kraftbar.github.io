@@ -193,7 +193,7 @@ window.addEventListener('load', function () {
 var typed_word = document.getElementById("typed_word");
 
 
-document.removeEventListener("keydown", globalhotkeys, false);  
+document.removeEventListener("keydown", global_hotkeys, false);  
 
 typed_word.addEventListener('focus', function() {
   document.removeEventListener("keydown", global_hotkeys, false);  
