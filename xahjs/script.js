@@ -219,10 +219,10 @@ function global_hotkeys(e) {
     if(keyCode==13) {
       //clearInterval(myVar);
       //myVar = setInterval(autoforward, 2000);
-      nextItem();
+      nextFlashcard();
     } 
     if(keyCode == 191) {
-      nextFlashcard();
+      prevItem();
     }
     if(keyCode == 37) {
       prevItem();
