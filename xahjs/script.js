@@ -1,8 +1,9 @@
 // TODO
-//   - bug: flashcard and text2speech
+//   - bug:  text2speech
 //   - refactooooooor!!
 //   - consider reset in automode
 //   - colour in  based on correct_flag
+//   - flashcard button a littl buggy
 
 
 var c = document.getElementById("myCanvas");
@@ -193,7 +194,7 @@ window.addEventListener('load', function () {
 var typed_word = document.getElementById("typed_word");
 
 
-document.removeEventListener("keydown", global_hotkeys, false);  
+document.addEventListener("keydown",    global_hotkeys, false);
 
 typed_word.addEventListener('focus', function() {
   document.removeEventListener("keydown", global_hotkeys, false);  
