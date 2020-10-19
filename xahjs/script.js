@@ -28,21 +28,27 @@ standardLang_flag=1;
 
 function pros(csv){
 
-    k=0;
-
-    // trailing white space 
-    csv=csv.replace(/\n+$/, "");
+    csv=format(csv);
     var rows = csv.split('\n');
-    words_length=rows.length;
-
     for (var i = 0; i < rows.length; i++) {
-      cols = rows[i].split('\t');
-      words[i] = cols;
+      words[i] = rows[i].split('\t');
     }
+
+    k=0;
+    words_length=rows.length;
     document.getElementById('output').innerHTML = words[k][0]+" "+words[k][1];
     
 }
 
+function format(text){
+  // replace brackets and whats within
+  text=text.replace(/ *\([^)]*\) */g, "");  
+  // whitespaces in front 
+  text=text.replace(/^ */gm, "");     
+  // trailing newline and  whitespaces
+  text=text.replace(/[ \n]+$/, "");     
+  return text;
+} 
 
 
 function processFile(){
@@ -62,7 +68,7 @@ function processText(){
 }
 
 
-// Feedback correct 
+// Feedback correct (todo, need refactor)
 function prossFeedback(userInput, solutions){
   highestMatchScores=[];
   feedbacks=[];
@@ -121,10 +127,11 @@ function prevItem() {
     if(k<0){k=0;}
     document.getElementById('output').textContent =  words[k][0]+" "+words[k][1]; 
 }
-function checkItem() {
 
+// Feedback correct (todo, need refactor)
+function checkItem() {
   var inputVal = document.getElementById("typed_word").value.toLowerCase();
-  var answer=words[k][2].replace(/^ *| *\([^)]*\) */g, ""); //   replace brackets and whitespace 
+  var answer=words[k][2];  
   var answers=answer.split(", ");
   feedback=prossFeedback(inputVal,answers);
     if(inputVal==feedback){              
@@ -145,31 +152,27 @@ function checkItem() {
 // ---------------------------------------------------------------------
 
 // button input
-window.addEventListener('load', function () {
-
-    document.getElementById('prev_button').addEventListener(
-        'click', // we want to listen for a click
-        function (e) { // the e here is the event itself
-             prevItem();
-        }
-    );
-    
-    document.getElementById('next_button').addEventListener(
-        'click', // we want to listen for a click
-        function (e) { // the e here is the event itself
-            nextItem();
-        }
-    );
-    document.getElementById('check_button').addEventListener(
-        'click', // we want to listen for a click
-        function (e) { // the e here is the event itself
-            checkItem();
-        }
-    );
+document.getElementById('prev_button').addEventListener(
+  'click', // we want to listen for a click
+  function (e) { // the e here is the event itself
+        prevItem();
+  }
+);
+document.getElementById('next_button').addEventListener(
+  'click', // we want to listen for a click
+  function (e) { // the e here is the event itself
+      nextItem();
+  }
+);
+document.getElementById('check_button').addEventListener(
+  'click', // we want to listen for a click
+  function (e) { // the e here is the event itself
+      checkItem();
+  }
+);
 
 
 
-});
 
 
 
@@ -178,7 +181,6 @@ window.addEventListener('load', function () {
 // hotkeys. 
 // ---------------------------------------------------------------------
 var typed_word = document.getElementById("typed_word");
-
 
 document.addEventListener("keydown",    global_hotkeys, false);
 
@@ -405,7 +407,6 @@ function focusFunction() {
       } else {
         hide6.style.display = "none";
       }
-      var alignValue = "center";
 
       var div1 = document.getElementById ("input_output");
       var div2 = document.getElementById ("buttons");
