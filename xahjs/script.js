@@ -4,7 +4,7 @@
 //   - consider reset in automode
 //   - colour in  based on correct_flag
 //   - reset languages when new   read
-
+//   - think about own regex function | replace  | replace
 
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
@@ -15,48 +15,34 @@ ctx.fillText("Hello World", 10, 50);
 // globals 
 var words = new Array(1000);
 var words_buffer = new Array(1000);
-var words_pinyin_woAccents = new Array(1000);
-var words_empt=words;
 var words_length=0;
 correct_flag=0;
 standardLang_flag=1;
 
 
 
-// -----------------------
+// ---------------------------------------------------------------------
 // file/ txts handeling 
-// -----------------------
+// ---------------------------------------------------------------------
+
 
 function pros(csv){
-    // conider more regex 
-    
-    //reset
+
     k=0;
-    words=words_empt;
 
-    // remove trailing newline 
-
+    // trailing white space 
     csv=csv.replace(/\n+$/, "");
-
     var rows = csv.split('\n');
-
-
     words_length=rows.length;
 
     for (var i = 0; i < rows.length; i++) {
       cols = rows[i].split('\t');
-      words[i] = new Array(3);
-      for (var j = 0; j < cols.length; j++) {
-        var value = cols[j];
-        console.log(value)
-        words[i][j] = value;
-      }
-      woAccents=cols[1].normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-      words_pinyin_woAccents[i]=woAccents;
+      words[i] = cols;
     }
     document.getElementById('output').innerHTML = words[k][0]+" "+words[k][1];
     
 }
+
 
 
 function processFile(){
@@ -108,9 +94,9 @@ function prossFeedback(userInput, solutions){
   return feedbacks[highestMatchIndex];
 }
 
-// -----------------------
+// ---------------------------------------------------------------------
 // display word array 
-// -----------------------
+// ---------------------------------------------------------------------
 
 function nextFlashcard(){
     var feedbackvalue = document.getElementById("feedback").textContent;
@@ -154,9 +140,9 @@ function checkItem() {
 
 
 
-// -----------------------
+// ---------------------------------------------------------------------
 // User input 
-// -----------------------
+// ---------------------------------------------------------------------
 
 // button input
 window.addEventListener('load', function () {
@@ -188,9 +174,9 @@ window.addEventListener('load', function () {
 
 
 
-// -----------------------
+// ---------------------------------------------------------------------
 // hotkeys. 
-// -----------------------
+// ---------------------------------------------------------------------
 var typed_word = document.getElementById("typed_word");
 
 
@@ -240,9 +226,9 @@ function global_hotkeys(e) {
 
 
 
-// -----------------------
+// ---------------------------------------------------------------------
 // Misc. 
-// -----------------------
+// ---------------------------------------------------------------------
 function text2speech(){
   var msg = new SpeechSynthesisUtterance(words[k][0]);msg.lang = 'zh-CN';
 window.speechSynthesis.speak(msg);
@@ -257,15 +243,9 @@ function randomize() {
 }
 
 function changeLangFunction(pos1,pos2) {
-    console.log(pos1);
-    console.log(pos2);
-//    words=words_empt;
     for (var i = 0; i < words_length; i++) {
         [words[i][pos1], words[i][pos2]] = [words[i][pos2], words[i][pos1]];
     }
-
-    // consider hide functionality
-
 }
 
 
@@ -284,20 +264,17 @@ function hideMiddle() {
 
 
 
-// -----------------------
+// ---------------------------------------------------------------------
 // Automode 
-// -----------------------
-function autoforward() {
-  nextFlashcard();
+// ---------------------------------------------------------------------
 
-}
 myVar=null
 auto_flag=0;
 function automode() {
   if(auto_flag){
     clearInterval(myVar);
   }else{
-     myVar = setInterval(autoforward, 2000);
+     myVar = setInterval(nextFlashcard, 2000);
   }
   auto_flag=!auto_flag; 
   
@@ -305,13 +282,9 @@ function automode() {
 
 
 
-// -----------------------  
+// ---------------------------------------------------------------------  
 // change lang 
-// -----------------------
-
-// 1. update array every event
-// 2. update x with real val
-// - trigger hideMiddle whenever a x is moved
+// ---------------------------------------------------------------------
 
 
 const fills = document.querySelectorAll('.fill');
@@ -381,10 +354,10 @@ function switchlang(){
 
 
 
-// -----------------------
+// ---------------------------------------------------------------------
 // focus mode 
 // todo: refactor, looks ugly now
-// -----------------------
+// ---------------------------------------------------------------------
 
 function focusFunction() {
     var hide0 = document.getElementById("myCanvas");
@@ -445,9 +418,9 @@ function focusFunction() {
 
 
   
-// -----------------------
+// ---------------------------------------------------------------------
 // cookie. 
-// -----------------------
+// ---------------------------------------------------------------------
 function setCookie(cname,cvalue,exdays) {
   var d = new Date();
   d.setTime(d.getTime() + (exdays*24*60*60*1000));
