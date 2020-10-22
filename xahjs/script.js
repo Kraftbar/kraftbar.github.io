@@ -47,6 +47,8 @@ function format(text){
   text=text.replace(/^ */gm, "");     
   // trailing newline and  whitespaces
   text=text.replace(/[ \n]+$/, "");     
+  // not case sensitive
+  text=text.toLowerCase()
   return text;
 } 
 
