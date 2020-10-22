@@ -169,7 +169,7 @@ document.getElementById('next_button').addEventListener(
 document.getElementById('check_button').addEventListener(
   'click', // we want to listen for a click
   function (e) { // the e here is the event itself
-      checkItem();
+      nextFlashcard();
   }
 );
 
