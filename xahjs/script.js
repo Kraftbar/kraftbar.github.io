@@ -1,10 +1,8 @@
 // TODO
 //   - bug:  text2speech
-//   - refactooooooor!!
-//   - consider reset in automode
 //   - colour in  based on correct_flag
 //   - reset languages when new   read
-//   - think about own regex function | replace  | replace
+//   - multiple choice feature? 
 
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
@@ -22,7 +20,7 @@ standardLang_flag=1;
 
 
 // ---------------------------------------------------------------------
-// file/ txts handeling 
+// file/ txts handling 
 // ---------------------------------------------------------------------
 
 
