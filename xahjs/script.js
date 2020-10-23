@@ -80,9 +80,10 @@ function checkAnswer(userInput){
   highestMatchScores=[];
   feedbacks=[];
 
+  
+  // get match score(s) 
   var answer=words[k][2];  
   var solutions=answer.split(", ");
-
   for (j = 0; j < solutions.length; j++) {
     solution=solutions[j];
     matchScore=0;
@@ -99,11 +100,12 @@ function checkAnswer(userInput){
     highestMatchScores.push(matchScore);
   }
 
-  // find the highest match
+  // sort and get highest match score 
   var sorted = [...highestMatchScores].sort((a,b) => b - a);
   highestMatchIndex=highestMatchScores.indexOf(sorted[0]);
   feedback= feedbacks[highestMatchIndex];
 
+  // return
   if(userInput==feedback){              
     correct_flag=correct_flag+1;
   }else{
