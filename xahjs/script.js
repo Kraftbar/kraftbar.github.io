@@ -158,37 +158,6 @@ function prevItem() {
 
 
 
-
-// ---------------------------------------------------------------------
-// User input 
-// ---------------------------------------------------------------------
-
-// button input
-document.getElementById('prev_button').addEventListener(
-  'click', // we want to listen for a click
-  function (e) { // the e here is the event itself
-        prevItem();
-  }
-);
-document.getElementById('next_button').addEventListener(
-  'click', // we want to listen for a click
-  function (e) { // the e here is the event itself
-      nextItem();
-  }
-);
-document.getElementById('check_button').addEventListener(
-  'click', // we want to listen for a click
-  function (e) { // the e here is the event itself
-      nextFlashcard();
-  }
-);
-
-
-
-
-
-
-
 // ---------------------------------------------------------------------
 // hotkeys. 
 // ---------------------------------------------------------------------
