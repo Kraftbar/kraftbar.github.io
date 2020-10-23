@@ -70,18 +70,25 @@ function processText(){
 }
 
 
-// Feedback correct (todo, need refactor)
-function prossFeedback(userInput, solutions){
+
+
+
+// ---------------------------------------------------------------------
+// check item
+// ---------------------------------------------------------------------
+
+function checkAnswer(userInput){
+
   highestMatchScores=[];
   feedbacks=[];
 
+  var answer=words[k][2];  
+  var solutions=answer.split(", ");
+
   for (j = 0; j < solutions.length; j++) {
-
     solution=solutions[j];
-
     matchScore=0;
     var feedback="";
-
     for (var i = 0; i < solution.length; i++) {
       if(userInput.charAt(i)==solution.charAt(i)){
         matchScore=matchScore+1;
@@ -90,7 +97,6 @@ function prossFeedback(userInput, solutions){
         feedback=feedback.concat("_");
       }
     }
-
     feedbacks.push(feedback);
     highestMatchScores.push(matchScore);
   }
@@ -98,14 +104,34 @@ function prossFeedback(userInput, solutions){
   // find the highest match
   var sorted = [...highestMatchScores].sort((a,b) => b - a);
   highestMatchIndex=highestMatchScores.indexOf(sorted[0]);
+  feedback= feedbacks[highestMatchIndex];
 
-  return feedbacks[highestMatchIndex];
+  if(userInput==feedback){              
+    correct_flag=correct_flag+1;
+  }else{
+    correct_flag=0;
+  }
+  return feedback;
 }
+
+
+
 
 // ---------------------------------------------------------------------
 // display word array 
 // ---------------------------------------------------------------------
 
+// Feedback correct (todo, need refactor)
+function checkItem() {
+  var userInput = document.getElementById("typed_word").value.toLowerCase();
+  feedback=checkAnswer(userInput);
+  if(correct_flag>0){              
+    document.getElementById('feedback').textContent=  feedback.concat(" ✓");
+  }else{
+    document.getElementById('feedback').textContent=  feedback.concat(" ☓");  
+  }
+
+}
 function nextFlashcard(){
     var feedbackvalue = document.getElementById("feedback").textContent;
     console.log(feedbackvalue);
@@ -130,21 +156,7 @@ function prevItem() {
     document.getElementById('output').textContent =  words[k][0]+" "+words[k][1]; 
 }
 
-// Feedback correct (todo, need refactor)
-function checkItem() {
-  var inputVal = document.getElementById("typed_word").value.toLowerCase();
-  var answer=words[k][2];  
-  var answers=answer.split(", ");
-  feedback=prossFeedback(inputVal,answers);
-    if(inputVal==feedback){              
-      correct_flag=correct_flag+1;
-      document.getElementById('feedback').textContent=   feedback.concat(" ✓");
-    }else{
-      correct_flag=0;
-    
-      document.getElementById('feedback').textContent=  feedback.concat(" ☓");
-    }
-}
+
 
 
 
@@ -286,10 +298,10 @@ function automode() {
 
 
 
+
 // ---------------------------------------------------------------------  
 // change lang 
 // ---------------------------------------------------------------------
-
 
 const fills = document.querySelectorAll('.fill');
 const empties = document.querySelectorAll('.empty');
@@ -355,6 +367,8 @@ function switchlang(){
         
     }
 }
+
+
 
 
 
