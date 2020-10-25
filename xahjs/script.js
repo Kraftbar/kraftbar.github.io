@@ -2,7 +2,7 @@
 //   - bug:  text2speech
 //   - colour in  based on correct_flag
 //   - reset languages when new   read
-//   - multiple choice feature? 
+//   - multiple hotkeys? 
 
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
@@ -165,6 +165,7 @@ function prevItem() {
     k = k - 1; 
     if(k<0){k=0;}
     document.getElementById('output').textContent =  words[k][0]+" "+words[k][1]; 
+    fillMult();
 }
 
 
@@ -185,7 +186,7 @@ function fillMult(){
 function checkmult(div_id){
   m_answer=document.getElementById(div_id).value;
   checkAnswer(m_answer);
-  if(correct_flag>1){
+  if(correct_flag>0){
     nextItem();
   }
 
