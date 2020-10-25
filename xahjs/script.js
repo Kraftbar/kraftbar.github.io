@@ -35,7 +35,7 @@ function pros(csv){
     words_length=rows.length;
     // init text
     document.getElementById('output').innerHTML  = words[k][0]+" "+words[k][1];
-    nextItem();
+    fillMult();
 }
 
 function format(text){
