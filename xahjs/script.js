@@ -25,17 +25,17 @@ standardLang_flag=1;
 
 
 function pros(csv){
-
     csv=format(csv);
     var rows = csv.split('\n');
     for (var i = 0; i < rows.length; i++) {
       words[i] = rows[i].split('\t');
     }
-
+    // init globals 
     k=0;
     words_length=rows.length;
-    document.getElementById('output').innerHTML = words[k][0]+" "+words[k][1];
-    
+    // init text
+    document.getElementById('output').innerHTML  = words[k][0]+" "+words[k][1];
+    nextItem();
 }
 
 function format(text){
@@ -60,6 +60,7 @@ function processFile(){
       pros(csv)
 
     }
+    
   }
 
 function processText(){
@@ -72,7 +73,7 @@ function processText(){
 
 
 // ---------------------------------------------------------------------
-// check item
+// check item   (needs refactor)
 // ---------------------------------------------------------------------
 
 function checkAnswer(userInput){
@@ -84,6 +85,8 @@ function checkAnswer(userInput){
   // get match score(s) 
   var answer=words[k][2];  
   var solutions=answer.split(", ");
+
+  
   for (j = 0; j < solutions.length; j++) {
     solution=solutions[j];
     matchScore=0;
@@ -105,8 +108,15 @@ function checkAnswer(userInput){
   highestMatchIndex=highestMatchScores.indexOf(sorted[0]);
   feedback= feedbacks[highestMatchIndex];
 
+
+  // for multi_c
+  var userInputs=userInput.split(", ");
+  const found = userInputs.some(r=> solutions.indexOf(r) >= 0)
+  console.log(userInputs   )
+  console.log(found   )
+  console.log(found   )
   // return
-  if(userInput==feedback){              
+  if(userInput==feedback || found>0){              
     correct_flag=correct_flag+1;
   }else{
     correct_flag=0;
@@ -147,6 +157,7 @@ function nextItem() {
     k = k+1; 
     k = k % (words_length); 
     document.getElementById('output').textContent =   words[k][0]+" "+words[k][1];
+    fillMult();
 }
 function prevItem() {
     document.getElementById('feedback').innerHTML="";
@@ -157,6 +168,28 @@ function prevItem() {
 }
 
 
+// ---------------------------------------------------------------------
+// multi. choice 
+// ---------------------------------------------------------------------
+function fillMult(){
+  var inputs = document.querySelectorAll('input[type=submit]');
+  inputs=Array.from(inputs);
+  inputs=inputs.sort(() => Math.random() - 0.5);
+  inputs[0].value=words[k][2];
+  for (var i = 1; i < inputs.length; i++) {
+    inputs[i].value=words[Math.floor(Math.random() * words_length)][2];
+  }
+}
+
+
+function checkmult(div_id){
+  m_answer=document.getElementById(div_id).value;
+  checkAnswer(m_answer);
+  if(correct_flag>1){
+    nextItem();
+  }
+
+}
 
 
 
@@ -363,10 +396,19 @@ function focusFunction() {
     hide6.style.display = hide6.style.display === 'none' ? '' : 'none';
     var div1 = document.getElementById ("input_output");
     var div2 = document.getElementById ("buttons");
+    var div4 = document.getElementById ("multgrid");
     div1.style.textAlign = "center";
     div2.style.textAlign = "center";
+    div4.style.textAlign = "center";
 
   }
+
+
+
+
+
+
+
 
 
 
@@ -413,3 +455,7 @@ function checkCookie() {
     }
   }
 }
+
+
+
+

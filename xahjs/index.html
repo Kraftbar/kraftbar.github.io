@@ -78,6 +78,7 @@ temp user: <span id="dispcookie"></span>
 <label id="prosLabel" for="file">or pros text below </label>
 <button id="prosButton" onclick="processText()">Process</button><br/>
 
+
 <textarea id="myTextarea" name="message" rows="10" cols="60">
   我	wǒ	I, me
   我们	wǒmen	we, us (pl.)
@@ -257,8 +258,16 @@ temp user: <span id="dispcookie"></span>
     <br/>
     <br/>
 
-
-
+    <div class="container" id="multgrid">
+      <div class="row">
+        <input onclick="checkmult(this.id)" id="m1" type="submit" value="Submit"  style="width:120px;height: 25px; "  vspace="5"> 
+        <input onclick="checkmult(this.id)" id="m2" type="submit" value="Submit"  style="width:120px;height: 25px; " > 
+      </div>
+      <div class="row">
+        <input onclick="checkmult(this.id)" id="m3" type="submit" value="Submit"  style="width:120px;height: 25px; " > 
+        <input onclick="checkmult(this.id)" id="m4" type="submit" value="Submit"  style="width:120px;height: 25px; " > 
+      </div>
+    </div>
 
 
 </body>
