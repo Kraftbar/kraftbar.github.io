@@ -226,8 +226,8 @@ function global_hotkeys(e) {
     if(keyCode == 191) {prevItem();}
     if(keyCode == 37) {prevItem();}
     if(keyCode == 39 ) {nextItem();}
-    if(keyCode == 49 || keyCode == 99) {checkmult("m1");}
-    if(keyCode == 50 || keyCode == 100) {checkmult("m2");}
+    if(keyCode == 49 || keyCode == 100) {checkmult("m1");}
+    if(keyCode == 50 || keyCode == 101) {checkmult("m2");}
     if(keyCode == 51 || keyCode == 97) {checkmult("m3");}
     if(keyCode == 52 || keyCode == 98) {checkmult("m4");}
     if(keyCode == 70) {
