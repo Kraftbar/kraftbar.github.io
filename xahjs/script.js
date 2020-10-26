@@ -222,20 +222,14 @@ function inputfield_hotkeys(e) {
 
 function global_hotkeys(e) {
   var keyCode = e.keyCode;
-    if(keyCode==13) {
-      //clearInterval(myVar);
-      //myVar = setInterval(autoforward, 2000);
-      nextFlashcard();
-    } 
-    if(keyCode == 191) {
-      prevItem();
-    }
-    if(keyCode == 37) {
-      prevItem();
-    }
-    if(keyCode ==39 ) {
-      nextItem();
-    }
+    if(keyCode == 13) {nextFlashcard();} 
+    if(keyCode == 191) {prevItem();}
+    if(keyCode == 37) {prevItem();}
+    if(keyCode == 39 ) {nextItem();}
+    if(keyCode == 49 ) {checkmult("m1");}
+    if(keyCode == 50 ) {checkmult("m2");}
+    if(keyCode == 51 ) {checkmult("m3");}
+    if(keyCode == 52 ) {checkmult("m4");}
     if(keyCode == 70) {
       focusFunction();
     }
@@ -404,9 +398,12 @@ function focusFunction() {
 
   }
 
+  function multiChoice() {
 
 
-
+    var hide0 = document.getElementById("multgrid");
+    hide0.style.display = hide0.style.display === 'none' ? '' : 'none';
+}
 
 
 
