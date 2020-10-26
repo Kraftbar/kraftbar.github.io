@@ -2,7 +2,6 @@
 //   - bug:  text2speech
 //   - colour in  based on correct_flag
 //   - reset languages when new   read
-//   - multiple hotkeys? 
 
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
@@ -50,18 +49,6 @@ function format(text){
   return text;
 } 
 
-
-function processFile(){
-    var file = document.querySelector('#myFile').files[0];
-    var reader = new FileReader();
-    reader.readAsText(file);
-    reader.onload = function(event) {
-      var csv = event.target.result;
-      pros(csv)
-
-    }
-    
-  }
 
 function processText(){
     var x = document.getElementById("myTextarea").value;
@@ -112,9 +99,6 @@ function checkAnswer(userInput){
   // for multi_c
   var userInputs=userInput.split(", ");
   const found = userInputs.some(r=> solutions.indexOf(r) >= 0)
-  console.log(userInputs   )
-  console.log(found   )
-  console.log(found   )
   // return
   if(userInput==feedback || found>0){              
     correct_flag=correct_flag+1;
@@ -144,7 +128,6 @@ function checkItem() {
 }
 function nextFlashcard(){
     var feedbackvalue = document.getElementById("feedback").textContent;
-    console.log(feedbackvalue);
     if (feedbackvalue=="" || feedbackvalue=="-" || feedbackvalue.includes("☓")){
       document.getElementById('feedback').textContent = words[k][2];
     }else{
@@ -376,16 +359,10 @@ function switchlang(){
 
 function focusFunction() {
     var hide0 = document.getElementById("myCanvas");
-    var hide1 = document.getElementById("fileLabel");
-    var hide2 = document.getElementById("myFile");
-    var hide3 = document.getElementById("prosFileButton");
     var hide4 = document.getElementById("prosLabel");
     var hide5 = document.getElementById("prosButton");
     var hide6 = document.getElementById("myTextarea");
     hide0.style.display = hide0.style.display === 'none' ? '' : 'none';
-    hide1.style.display = hide1.style.display === 'none' ? '' : 'none';
-    hide2.style.display = hide2.style.display === 'none' ? '' : 'none';
-    hide3.style.display = hide3.style.display === 'none' ? '' : 'none';
     hide4.style.display = hide4.style.display === 'none' ? '' : 'none';
     hide5.style.display = hide5.style.display === 'none' ? '' : 'none';
     hide6.style.display = hide6.style.display === 'none' ? '' : 'none';
@@ -419,7 +396,6 @@ function setCookie(cname,cvalue,exdays) {
   var d = new Date();
   d.setTime(d.getTime() + (exdays*24*60*60*1000));
   var expires = "expires=" + d.toGMTString();
-  console.log(expires);
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
