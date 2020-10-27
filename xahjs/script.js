@@ -2,6 +2,7 @@
 //   - bug:  text2speech
 //   - colour in  based on correct_flag
 //   - reset languages when new   read
+//   - remove word after multiple correct answers
 
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
