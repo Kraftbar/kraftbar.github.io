@@ -58,8 +58,20 @@ function processText(){
 
 
 
+// ---------------------------------------------------------------------
+// check item   (needs refactor)
+// ---------------------------------------------------------------------
+// wordMemory=[[word1,log],
+//             [word2,log],
+//             [word3,log]]
+wordMemory=[]
+function removeWord(){
+  
+}
 
-
+// 
+function logAnswer(){
+}
 // ---------------------------------------------------------------------
 // check item   (needs refactor)
 // ---------------------------------------------------------------------
@@ -116,7 +128,7 @@ function checkAnswer(userInput){
 // display word array 
 // ---------------------------------------------------------------------
 
-// Feedback correct (todo, need refactor)
+// Feedback correct 
 function checkItem() {
   var userInput = document.getElementById("typed_word").value.toLowerCase();
   feedback=checkAnswer(userInput);
