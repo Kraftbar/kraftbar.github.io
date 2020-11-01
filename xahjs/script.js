@@ -38,7 +38,7 @@ function pros(csv){
     document.getElementById('output').innerHTML  = words[k][0]+" "+words[k][1];
     fillMult();
     // log txt
-
+    textHash(csv)
 }
 
 function format(text){
@@ -68,7 +68,6 @@ function processText(){
 //             [word2,log],
 //             [word3,log]]
 
-words_log=[]
 function removeWord(){
 
 }
@@ -413,11 +412,10 @@ function focusFunction() {
 // use hash to idetify words 
 function textHash(txt_input) {
   // remove newline
-  txt_input.replace(/(\r\n|\n|\r)|\t/gm, "");
+  txt_hash=txt_input.replace(/(\r\n|\n|\r)|\t| /gm, "");
   // pick out at random substing 
-  txt_input.replace(/.(.){4}/g,"$1")
-
-
+  txt_hash=txt_hash.replace(/.(.){4}/g,"$1")
+  console.log(txt_hash)
 }
 
 
