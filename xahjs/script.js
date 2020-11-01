@@ -13,6 +13,7 @@ ctx.fillText("Hello World", 10, 50);
 // globals 
 var words = new Array(1000);
 var words_buffer = new Array(1000);
+var words_log = new Array(1000);
 var words_length=0;
 correct_flag=0;
 standardLang_flag=1;
@@ -36,6 +37,8 @@ function pros(csv){
     // init text
     document.getElementById('output').innerHTML  = words[k][0]+" "+words[k][1];
     fillMult();
+    // log txt
+
 }
 
 function format(text){
@@ -64,9 +67,10 @@ function processText(){
 // wordMemory=[[word1,log],
 //             [word2,log],
 //             [word3,log]]
-wordMemory=[]
+
+words_log=[]
 function removeWord(){
-  
+
 }
 
 // 
@@ -405,6 +409,18 @@ function focusFunction() {
 // ---------------------------------------------------------------------
 // cookie. 
 // ---------------------------------------------------------------------
+
+// use hash to idetify words 
+function textHash(txt_input) {
+  // remove newline
+  txt_input.replace(/(\r\n|\n|\r)|\t/gm, "");
+  // pick out at random substing 
+  txt_input.replace(/.(.){4}/g,"$1")
+
+
+}
+
+
 function setCookie(cname,cvalue,exdays) {
   var d = new Date();
   d.setTime(d.getTime() + (exdays*24*60*60*1000));
@@ -442,7 +458,3 @@ function checkCookie() {
     }
   }
 }
-
-
-
-
