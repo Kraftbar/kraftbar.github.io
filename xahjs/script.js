@@ -391,13 +391,11 @@ function focusFunction() {
 
   }
 
-  function multiChoice() {
-
-
+function multiChoice() {
     var hide0 = document.getElementById("multgrid");
     hide0.style.display = hide0.style.display === 'none' ? '' : 'none';
 }
-
+multiChoice();
 
 
 
