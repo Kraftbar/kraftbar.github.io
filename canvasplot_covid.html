@@ -33,6 +33,30 @@
                 <script src="jslib/lib-request.js"></script>
                 <script src="jslib/lib-canvasplot.js"></script>
                 <script>
+                    
+                    // --------------------------------------------------------------
+                    
+
+                    function cleanData(data){
+                    // --------------------------------------------------------------
+                        for (i = 0; i < data.length; i++) {
+                            if(data[i]==0 && data[i+1]==0 &&  (i!=data.length) ){
+                                data[i]=data[i+2]/3;
+                                data[i+1]=data[i+2]/3;
+                                data[i+2]=data[i+2]/3;
+                                console.log(i);      
+                            }
+                            
+
+                        }
+
+
+                        return data;
+
+                        
+                    }
+
+
                     // --------------------------------------------------------------
                     let obj = new canvasplot()
 
@@ -54,7 +78,9 @@
                         for (i = 1; i < Norway.length; i++) {
                             Norway_der.push(Norway[i]-Norway[i-1])
                         }
-                        obj.Draw(Norway_der.slice(40))
+                        relevantdata=Norway_der.slice(40)
+                        relevantdata=cleanData(relevantdata);
+                        obj.Draw(relevantdata);
                     }
                     plot("Norway")
                     // --------------------------------------------------------------
