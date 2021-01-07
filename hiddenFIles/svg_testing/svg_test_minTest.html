@@ -1,0 +1,62 @@
+<div><textarea id=source cols=60 rows=15>Enter text to see result.</textarea></div>
+<div id=heatmap-container><svg width=500 height=200></svg></div>
+<script>
+function updateHeatmap(text) {
+
+
+    var x= [200, -10, -20, -25, -40, 5, 10, 28, 30, 43, 65, 80];
+    var y= [20, -10, -20, -25, -40, 5, 10, 28, 30, 43, 65, 80];
+
+
+
+	let svg = el("svg", { width: 500, height: 200 }, el => {
+        let keySize = 40
+        
+        for(i = 1; i < y.length; i++){
+            console.log("asdas")
+            el("line", {
+            "x1":i*30,
+            "y1":y[i],
+            "x2":(i+1)*30, 
+            "y2":y[i+1] ,
+            "style":"stroke:rgb(255,0,0);stroke-width:2"
+            })
+           }
+            
+        
+    })
+	let container = document.getElementById("heatmap-container")
+    container.replaceChild(svg, container.firstChild)
+}
+
+
+function el(name, attrs, children = null) {
+	let thisEl = document.createElementNS ("http://www.w3.org/2000/svg", name)
+    
+    for (let attrName in attrs) {
+    	thisEl.setAttribute(attrName, attrs[attrName])
+    }
+    
+    switch (typeof children) {
+    case "null":
+        break
+    case "function":
+    	children((name, attrs, makeChildren = null) => {
+        	let childEl = el(name, attrs, makeChildren)
+            thisEl.appendChild(childEl)
+        })
+        break
+    default:
+    	childEl = document.createTextNode(children)
+        thisEl.appendChild(childEl)
+    }
+    
+    return thisEl
+}
+
+let sourceTextarea = document.getElementById("source")
+sourceTextarea.addEventListener("input", (e) => { updateHeatmap(e.target.value) })
+updateHeatmap("svg")
+
+
+</script>
