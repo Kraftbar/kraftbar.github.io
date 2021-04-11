@@ -3,6 +3,8 @@
 //   - colour in  based on correct_flag
 //   - reset languages when new   read
 //   - remove word after multiple correct answers
+//   - reset things after new Process 
+//   - find a way to check pinyin 
 
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
@@ -454,3 +456,14 @@ function checkCookie() {
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+
