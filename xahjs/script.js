@@ -1,9 +1,12 @@
-// TODO
+// TODO:
 //   - bug:  text2speech
+//
+//   - in  format function, consider to remove all chars that is not needed 
 //   - colour in  based on correct_flag
-//   - reset languages when new   read
-//   - remove word after multiple correct answers
+//   - dont show word after multiple correct answers
+//
 //   - reset things after new Process 
+//
 //   - find a way to check pinyin 
 
 var c = document.getElementById("myCanvas");
@@ -64,7 +67,7 @@ function processText(){
 
 
 // ---------------------------------------------------------------------
-// check item   (needs refactor)
+// Hide word after multiple correct answers 
 // ---------------------------------------------------------------------
 // wordMemory=[[word1,log],
 //             [word2,log],
@@ -77,6 +80,9 @@ function removeWord(){
 // 
 function logAnswer(){
 }
+
+
+
 // ---------------------------------------------------------------------
 // check item   (needs refactor)
 // ---------------------------------------------------------------------
@@ -442,20 +448,17 @@ function getCookie(cname) {
   return "";
 }
 
+function saveCookie(){}
+function loadCookie(){}
+
+// need rewriting, use  functions above
 function checkCookie() {
   var user=getCookie("username");
-  if (user != "") {
-    document.getElementById("dispcookie").innerHTML = user;
-  } else {
-    user=""
-    while(user!="pepe"){
-     user = prompt("Please enter secret pass:","");
-     if (user != "" && user != null) {
-       setCookie("username", user, 30);
-     }
-    }
-  }
+  document.getElementById("dispcookie").innerHTML = user;
+  user = prompt("Please enter secret pass:","");
+  setCookie("username", user, 30);
 }
+
 
 
 
