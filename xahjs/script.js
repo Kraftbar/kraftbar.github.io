@@ -244,48 +244,8 @@ function global_hotkeys(e) {
   
 
 
-
-
 // ---------------------------------------------------------------------
-// Misc. 
-// ---------------------------------------------------------------------
-function text2speech(){
-  var msg = new SpeechSynthesisUtterance(words[k][0]);msg.lang = 'zh-CN';
-window.speechSynthesis.speak(msg);
-}
-
-function randomize() {
-  words.sort(() => Math.random() - 0.5);
-  for (var i = 0; i < words_length; i++) {
-    words_buffer[i]=words[i][1];
-  }
-  nextItem();
-}
-
-function changeLangFunction(pos1,pos2) {
-    for (var i = 0; i < words_length; i++) {
-        [words[i][pos1], words[i][pos2]] = [words[i][pos2], words[i][pos1]];
-    }
-}
-
-
-function hideMiddle() {
-    for (var i = 0; i < words_length; i++) {
-        if(standardLang_flag){
-            words_buffer[i]=words[i][1];
-            words[i][1]="";
-
-        }else{
-            words[i][1]=words_buffer[i];
-        }
-    }
-    standardLang_flag=!standardLang_flag;
-}
-
-
-
-// ---------------------------------------------------------------------
-// Automode 
+// Misc. Buttons 
 // ---------------------------------------------------------------------
 
 myVar=null
@@ -299,6 +259,40 @@ function automode() {
   auto_flag=!auto_flag; 
   
 }
+
+function randomize() {
+  words.sort(() => Math.random() - 0.5);
+  for (var i = 0; i < words_length; i++) {
+    words_buffer[i]=words[i][1];
+  }
+  nextItem();
+}
+
+
+function text2speech(){
+  var msg = new SpeechSynthesisUtterance(words[k][0]);msg.lang = 'zh-CN';
+window.speechSynthesis.speak(msg);
+}
+
+function changeLangFunction(pos1,pos2) {
+  for (var i = 0; i < words_length; i++) {
+      [words[i][pos1], words[i][pos2]] = [words[i][pos2], words[i][pos1]];
+  }
+}
+
+
+function hideMiddle() {
+  for (var i = 0; i < words_length; i++) {
+      if(standardLang_flag){
+          words_buffer[i]=words[i][1];
+          words[i][1]="";
+      }else{
+          words[i][1]=words_buffer[i];
+      }
+  }
+  standardLang_flag=!standardLang_flag;
+}
+
 
 
 
@@ -371,9 +365,6 @@ function switchlang(){
         
     }
 }
-
-
-
 
 
 // ---------------------------------------------------------------------
