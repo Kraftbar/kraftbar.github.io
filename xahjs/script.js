@@ -1,5 +1,5 @@
 // TODO:
-//   - bug:  text2speech
+//   - text2speech, set hotkey
 //
 //   - in  format function, consider to remove all chars that is not needed 
 //   - colour in  based on correct_flag
@@ -7,7 +7,7 @@
 //
 //   - reset things after new Process 
 //
-//   - find a way to check pinyin 
+//   - find a way to check pinyin (fashcards?)
 
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
@@ -272,6 +272,7 @@ function randomize() {
 function text2speech(){
   numcn=0
   if(words[k][0][0].match(/[\u3400-\u9FBF]/)){numcn=0}
+  // bugges out when hidden 
   if(words[k][1][0].match(/[\u3400-\u9FBF]/)){numcn=1}
   if(words[k][2][0].match(/[\u3400-\u9FBF]/)){numcn=2}
   var msg = new SpeechSynthesisUtterance(words[k][numcn]);
