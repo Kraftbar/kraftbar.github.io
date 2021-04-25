@@ -270,8 +270,13 @@ function randomize() {
 
 
 function text2speech(){
-  var msg = new SpeechSynthesisUtterance(words[k][0]);msg.lang = 'zh-CN';
-window.speechSynthesis.speak(msg);
+  numcn=0
+  if(words[k][0][0].match(/[\u3400-\u9FBF]/)){numcn=0}
+  if(words[k][1][0].match(/[\u3400-\u9FBF]/)){numcn=1}
+  if(words[k][2][0].match(/[\u3400-\u9FBF]/)){numcn=2}
+  var msg = new SpeechSynthesisUtterance(words[k][numcn]);
+  msg.lang = 'zh-CN';
+  window.speechSynthesis.speak(msg);
 }
 
 function changeLangFunction(pos1,pos2) {
