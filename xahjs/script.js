@@ -59,8 +59,8 @@ function format(text){
 } 
 
 
-function processText(){
-    var x = document.getElementById("myTextarea").value;
+function processText(myTextarea_id){
+    var x = document.getElementById(myTextarea_id).value;
     pros(x)
 }
 
