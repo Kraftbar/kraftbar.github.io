@@ -59,8 +59,8 @@ function format(text){
 } 
 
 
-function processText(){
-    var x = document.getElementById("myTextarea").value;
+function processText(myTextarea_id){
+    var x = document.getElementById(myTextarea_id).value;
     pros(x)
 }
 
@@ -270,15 +270,17 @@ function randomize() {
 
 
 function text2speech(){
-  numcn=0
-  if(words[k][0][0].match(/[\u3400-\u9FBF]/)){numcn=0}
-  // bugges out when hidden 
-  if(words[k][1][0].match(/[\u3400-\u9FBF]/)){numcn=1}
-  if(words[k][2][0].match(/[\u3400-\u9FBF]/)){numcn=2}
-  var msg = new SpeechSynthesisUtterance(words[k][numcn]);
+  for (i = 0; i < words[k].length; i++) {
+      if(words[k][i][0] && words[k][i][0].match(/[\u3400-\u9FBF]/)){
+        var msg = new SpeechSynthesisUtterance(words[k][i]);
+      }else{
+        var msg = new SpeechSynthesisUtterance(words_buffer[k]);        
+      }
+  }
   msg.lang = 'zh-CN';
   window.speechSynthesis.speak(msg);
 }
+
 
 function changeLangFunction(pos1,pos2) {
   for (var i = 0; i < words_length; i++) {
@@ -380,13 +382,15 @@ function switchlang(){
 
 function focusFunction() {
     var hide0 = document.getElementById("myCanvas");
-    var hide4 = document.getElementById("prosLabel");
-    var hide5 = document.getElementById("prosButton");
-    var hide6 = document.getElementById("myTextarea");
+    var hide4 = document.getElementById("prosButton1");
+    var hide5 = document.getElementById("prosButton2");
+    var hide6 = document.getElementById("myTextarea1");
+    var hide7 = document.getElementById("myTextarea2");
     hide0.style.display = hide0.style.display === 'none' ? '' : 'none';
     hide4.style.display = hide4.style.display === 'none' ? '' : 'none';
     hide5.style.display = hide5.style.display === 'none' ? '' : 'none';
     hide6.style.display = hide6.style.display === 'none' ? '' : 'none';
+    hide7.style.display = hide7.style.display === 'none' ? '' : 'none';
     var div1 = document.getElementById ("input_output");
     var div2 = document.getElementById ("buttons");
     var div4 = document.getElementById ("multgrid");
