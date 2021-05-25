@@ -8,6 +8,8 @@
 //   - reset things after new Process 
 //
 //   - find a way to check pinyin (fashcards?)
+//
+//   - integrate decks, can pick from decks
 
 var c = document.getElementById("myCanvas");
 var ctx = c.getContext("2d");
@@ -377,7 +379,7 @@ function switchlang(){
 
 // ---------------------------------------------------------------------
 // focus mode 
-// todo: refactor, looks ugly now
+// todo: refactor, looks ugly now, make adaptive
 // ---------------------------------------------------------------------
 
 function focusFunction() {
@@ -407,9 +409,15 @@ function multiChoice() {
 multiChoice();
 
 
-
-
-
+function focusFunctionBetter() {
+	var all = document.getElementsByTagName("*");
+	for (var i=0, max=all.length; i < max; i++) {
+		all[i].style.display = hide5.style.display === 'none' ? '' : 'none';
+	}
+    div1.style.textAlign = "center";
+    div2.style.textAlign = "center";
+    div4.style.textAlign = "center";
+}
 
   
 // ---------------------------------------------------------------------
