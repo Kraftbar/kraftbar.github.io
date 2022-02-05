@@ -1,0 +1,151 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+
+  <title>xahjs</title>
+    <meta name="viewport" content="width=700, maximum-scale=2.0, user-scalable=1" charset="utf-8">
+    <link href="../index.css" rel="stylesheet">
+    <style> 
+
+    .fill {
+     height: 30px;
+     width: 30px;
+     cursor: pointer;
+    }
+
+    .hold {
+     border: solid 2px #ccc;
+    }
+
+    .empty {
+     display: inline-block;
+     height: 30px;
+     width: 30px;
+     overflow: hidden;
+       border: solid 1px gray;
+    }
+
+    .hovered {
+     background: #f4f4f4;
+     border-style: dashed;
+    }
+    </style>
+
+</head>
+
+<!-- <body onload="checkCookie()"> -->
+<body >
+
+  <button onclick="focusFunction()">Focus m.</button>
+  <button onclick="randomize()">rand</button>
+  <button onclick="nextFlashcard() ">fashcard</button>
+  <button onclick="text2speech()" id="text2speech">text2speech</button>
+  <button onclick="automode()" id="automode">automode</button>
+  <button onclick="multiChoice()" >multp</button>
+
+<canvas id="myCanvas" width="200" height="100" style="border:1px solid #000000;">
+</canvas>
+
+<br/>
+<br/>
+<div id="container" >
+  <div class="empty" id="0">
+    <div class="fill"  id="eng"   draggable="true">eng</div>
+  </div>
+
+  <div class="empty" id="1" onclick="onClickLang(this.id)">
+    <div class="fill" id="jp"   draggable="true">jp</div>
+  </div>
+  <div class="empty" id="2">
+    <div class="fill" id="rōmaji"   draggable="true">rōmaji</div>
+  </div>
+
+</div>
+
+temp user: <span id="dispcookie"></span> <span id="txt_hash"></span>
+
+
+
+<br/>
+<br/>
+
+
+<button id="prosButton1" onclick="processText('myTextarea1')">Process deck1</button>
+<button                  onclick="myFunction('myTextarea1')" >Show/Hide deck1</button><br/>
+<textarea id="myTextarea1" name="message" rows="10" cols="60" style="display:none;">
+  Yes	はい	hai
+  No	いいえ	iie
+  Hello	こんにちは	konnichiwa
+  Goodbye	じゃね	ja ne
+  Thank you	ありがとう	arigatou
+  I’m Sorry	ごめんなさい	gomen nasai
+  Excuse me	すみません	sumimasen
+</textarea>
+
+<br/>
+<button id="prosButton2" onclick="processText('myTextarea2')">Process deck2</button>
+<button                  onclick="myFunction('myTextarea2')" >Show/Hide deck2</button><br/>
+<textarea id="myTextarea2" name="message" rows="10" cols="60" style="display:none;">
+  I	私	watashi
+  You	あなた	anata
+  This	これ	kore
+  That	それ	sore
+  He	彼	kare
+  She	彼女	kanojo
+  They	彼ら	karera
+</textarea>
+
+<br/>
+
+<button id="prosButton3" onclick="processText('myTextarea3')">Process deck3</button>
+<button                  onclick="myFunction('myTextarea3')" >Show/Hide deck3</button><br/>
+<textarea id="myTextarea3" name="message" rows="10" cols="60" style="display:none;">
+  One	いち	ichi
+  Two	に	ni
+  Three	さん	san
+  Four	し	shi
+  Five	ご	go
+  Six	ろく	roku
+  Seven	なな	nana
+  Eight	はち	hachi
+  Nine	く	ku
+  Ten	じゅう	juu
+</textarea>
+
+
+<br/>
+<br/>
+
+    <div id="input_output">
+    <div id="output"> <b>read in text before begin</b></div>
+    <input id="typed_word" type="text"  name="lname" />       <br/>
+    <label id="feedback" for="typed_word">-</label>     <br/>
+  </div>
+  <br/>
+
+    <div id="buttons">
+        <span id="prev_button"  onclick="prevItem()">Previous</span>
+        <span id="next_button"  onclick="nextItem()">Next</span>
+        <span id="check_button" onclick="nextFlashcard()">check</span>
+    </div>
+
+
+    <br/>
+
+    <div class="container" id="multgrid">
+      <div class="row">
+        <input onclick="checkmult(this.id)" id="m1" type="submit" value="Submit"  style="width:120px;height: 25px; "  vspace="5"> 
+        <input onclick="checkmult(this.id)" id="m2" type="submit" value="Submit"  style="width:120px;height: 25px; " > 
+      </div>
+      <div class="row">
+        <input onclick="checkmult(this.id)" id="m3" type="submit" value="Submit"  style="width:120px;height: 25px; " > 
+        <input onclick="checkmult(this.id)" id="m4" type="submit" value="Submit"  style="width:120px;height: 25px; " > 
+      </div>
+    </div>
+
+
+</body>
+<script src="utils.js"></script>  
+<script src="script.js"></script>  
+</html>
