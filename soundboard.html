@@ -2,34 +2,3 @@
 <!--     https://www.adobe.com/products/audition/offers/AdobeAuditionDLCSFX.html                             -->
 <!--     http://localhost/kraftbar.github.io/soundboard.html                                                 -->
 
-
-
-<html>
-  <head>
-    <script>
-      window.onload = function() {
-        fetch("sounds/")
-          .then((response) => response.text())
-          .then((text) => {
-            var parser = new DOMParser();
-            var htmlDoc = parser.parseFromString(text, "text/html");
-            var links = htmlDoc.querySelectorAll("a");
-            var sounds = Array.from(links)
-              .filter((link) => link.href.endsWith(".wav"))
-              .map((link) => link.href);
-
-            sounds.forEach((sound) => {
-              var button = document.createElement("button");
-              button.innerHTML = sound;
-              button.onclick = function() {
-                var audio = new Audio("sounds/" + sound);
-                audio.play();
-              };
-              document.body.appendChild(button);
-            });
-          });
-      };
-    </script>
-  </head>
-  <body></body>
-</html>
