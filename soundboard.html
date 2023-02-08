@@ -17,25 +17,49 @@
   <div id="buttons"></div>
 
   <script>
+    const sounds = [
+    "cheering.mp3",
+"dial_up.mp3",
+"fbi open up.mp3",
+"hello darkness.mp3",
+"trump-African-American.wav",
+"trump-Bing-Bing-Bong-Bong.wav",
+"trump-communities-of-color.wav",
+"trump-crime.wav",
+"trump-Disgrace.wav",
+"trump-Morally-Corrupt.wav",
+"trump-no-jobs.wav",
+"trump-No-Protection.wav",
+"trump-poverty.wav",
+"trump-Unbelieveable.wav",
+"trump-What-the-hell-is-going-on.wav",
+"trump-What-the-hell.wav",
+"trump-what.wav"
+    ];
+
     window.onload = function() {
-      const soundsUrl = "./sounds/";
-      const xhr = new XMLHttpRequest();
-      xhr.open("GET", soundsUrl);
-      xhr.onreadystatechange = function() {
-        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
-          const files = xhr.responseText.split("\n").filter(f => f.endsWith(".wav"));
-          files.forEach(file => {
-            const button = document.createElement("button");
-            button.innerHTML = file;
+      sounds.forEach(filename => {
+        const button = document.createElement("button");
+        button.innerHTML = "Play - " + filename;
+        button.onclick = function() {
+          const audio = new Audio("./sounds/" + filename );
+          audio.onplaying = function() {
+            button.innerHTML = "Stop - " + filename;
             button.onclick = function() {
-              const audio = new Audio(soundsUrl + file);
+              audio.pause();
+              audio.currentTime = 0;
+            };
+          };
+          audio.onpause = function() {
+            button.innerHTML = "Play - " + filename;
+            button.onclick = function() {
               audio.play();
             };
-            document.querySelector("#buttons").appendChild(button);
-          });
-        }
-      };
-      xhr.send();
+          };
+          audio.play();
+        };
+        document.querySelector("#buttons").appendChild(button);
+      });
     };
   </script>
 </body>
