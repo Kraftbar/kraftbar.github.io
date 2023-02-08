@@ -1,4 +1,42 @@
 <!--     https://www.reddit.com/r/audiodrama/comments/72fkdp/looking_for_sound_effects_heres_a_few_librarys/ -->
 <!--     https://www.adobe.com/products/audition/offers/AdobeAuditionDLCSFX.html                             -->
 <!--     http://localhost/kraftbar.github.io/soundboard.html                                                 -->
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    button {
+      display: block;
+      margin: 10px;
+      padding: 10px;
+      font-size: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div id="buttons"></div>
 
+  <script>
+    window.onload = function() {
+      const soundsUrl = "./sounds/";
+      const xhr = new XMLHttpRequest();
+      xhr.open("GET", soundsUrl);
+      xhr.onreadystatechange = function() {
+        if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+          const files = xhr.responseText.split("\n").filter(f => f.endsWith(".wav"));
+          files.forEach(file => {
+            const button = document.createElement("button");
+            button.innerHTML = file;
+            button.onclick = function() {
+              const audio = new Audio(soundsUrl + file);
+              audio.play();
+            };
+            document.querySelector("#buttons").appendChild(button);
+          });
+        }
+      };
+      xhr.send();
+    };
+  </script>
+</body>
+</html>
